@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alexssmusica/@alexssmusica/node-pdf-nfe.git"
+    "url": "https://github.com/Alexssmusica/node-pdf-nfe.git"
   },
   "scripts": {
     "version": "npm run format && git add -A src",
