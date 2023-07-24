@@ -1,5 +1,5 @@
 {
-  "name": "@alexssmusica/node-pdf",
+  "name": "@alexssmusica/node-pdf-nfe",
   "version": "1.0.49",
   "description": "Modulo que auxilia na geração de NFe e NFCe",
   "main": "lib/index.js",
@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alexssmusica/@alexssmusica/node-pdf.git"
+    "url": "https://github.com/Alexssmusica/@alexssmusica/node-pdf-nfe.git"
   },
   "scripts": {
     "version": "npm run format && git add -A src",
