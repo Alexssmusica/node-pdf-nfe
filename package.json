@@ -1,0 +1,88 @@
+{
+  "name": "@alexssmusica/node-pdf",
+  "version": "1.0.49",
+  "description": "Modulo que auxilia na geração de NFe e NFCe",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Rodrigo Marqui Garcia"
+  },
+  "files": [
+    "/lib",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "NFe",
+    "NFCe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alexssmusica/@alexssmusica/node-pdf.git"
+  },
+  "scripts": {
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "cleanDist": "npx rimraf lib",
+    "build": "npm run cleanDist && tsc -p tsconfig-build.json && npm run copyXSD&& npm run copyTTF",
+    "copyXSD": "copyfiles -u 1 src/**/*.xsd lib/",
+    "copyTTF": "copyfiles -u 1 src/**/*.ttf lib/",
+    "emissaoNFCE": "ts-node-dev --respawn --transpile-only ./src/testes/nfce/emissao.ts",
+    "statusNFCE": "ts-node-dev --respawn --transpile-only ./src/testes/nfce/status.ts",
+    "inutNFCE": "ts-node-dev --respawn --transpile-only ./src/testes/nfce/inutiliza.ts",
+    "cancNFCE": "ts-node-dev --respawn --transpile-only ./src/testes/nfce/cancelamento.ts",
+    "emissaoNFE": "ts-node-dev --respawn --transpile-only ./src/testes/nfe/emissao.ts",
+    "statusNFE": "ts-node-dev --respawn --transpile-only ./src/testes/nfe/status.ts",
+    "inutNFE": "ts-node-dev --respawn --transpile-only ./src/testes/nfe/inutiliza.ts",
+    "cancNFE": "ts-node-dev --respawn --transpile-only ./src/testes/nfe/cancelamento.ts",
+    "correcaoNFE": "ts-node-dev --respawn --transpile-only ./src/testes/nfe/carta-correcao.ts",
+    "pdf": "ts-node-dev --respawn --transpile-only ./src/testes/pdf/pdf.ts"
+  },
+  "dependencies": {
+    "brazilian-values": "^0.12.0",
+    "bwip-js": "^3.4.0",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "gammautils": "^0.0.81",
+    "module-alias": "^2.2.2",
+    "node-fetch": "^2.6.7",
+    "node-forge": "^1.3.1",
+    "pdfkit": "^0.13.0",
+    "qrcode": "^1.5.3",
+    "sha1": "^1.1.1",
+    "xml-crypto": "^2.1.5",
+    "xml2js": "^0.4.23",
+    "xsd-schema-validator": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/bwip-js": "^3.2.0",
+    "@types/date-fns": "^2.6.0",
+    "@types/jest": "^29.4.1",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^18.15.2",
+    "@types/node-fetch": "^2.6.2",
+    "@types/node-forge": "^1.3.1",
+    "@types/pdfkit": "^0.12.9",
+    "@types/qrcode": "^1.5.0",
+    "@types/sha1": "^1.1.3",
+    "@types/xml-crypto": "^1.4.2",
+    "@types/xml2js": "^0.4.11",
+    "@types/xsd-schema-validator": "^0.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.36.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  }
+}

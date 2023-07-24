@@ -1,0 +1,1 @@
+export declare function gerarQRCodeNFCeOffline(urlQRCode: string, chave: string, versaoQRCode: string, ambiente: string, diaEmissao: string, valorTotal: string, digestValue: string, idCSC: string, CSC: string): string;
