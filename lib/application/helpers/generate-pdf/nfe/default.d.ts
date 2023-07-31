@@ -18,5 +18,6 @@ export declare const DEFAULT_NFE: {
     ajusteYDaHomologacao: number;
     tamanhoDoCodigoDeBarras: number;
     corDoLayout: string;
-    creditos: string;
+    finalTamanhoDet1: number;
+    finalTamanhoDetDemais: number;
 };

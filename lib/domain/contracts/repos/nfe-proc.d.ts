@@ -1,5 +1,5 @@
 import { type Signature } from './nfe';
-import { type TNFeInfNFeIde, type TNFeInfNFeEmit, type TNFeInfNFeDest, type TNFeInfNFeDet, type TNFeInfNFeTotal, type TNFeInfNFeTransp, type TNFeInfNFePag, type TNFeInfNFeInfAdic } from './schema';
+import { type TNFeInfNFeIde, type TNFeInfNFeEmit, type TNFeInfNFeDest, type TNFeInfNFeDet, type TNFeInfNFeTotal, type TNFeInfNFeTransp, type TNFeInfNFePag, type TNFeInfNFeInfAdic, type TNFeInfNFeCobr } from './schema';
 export interface NFe {
     '$': {
         versao: string;
@@ -12,6 +12,7 @@ export interface NFe {
         det: TNFeInfNFeDet[];
         total: TNFeInfNFeTotal;
         transp: TNFeInfNFeTransp;
+        cobr?: TNFeInfNFeCobr;
         pag: TNFeInfNFePag;
         infAdic: TNFeInfNFeInfAdic;
     };
