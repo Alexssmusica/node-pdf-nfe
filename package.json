@@ -26,7 +26,7 @@
     "postversion": "git push && git push --tags",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "cleanDist": "npx rimraf lib",
-    "build": "npm run cleanDist && tsc -p tsconfig-build.json && npm run copyXSD&& npm run copyTTF",
+    "build": "npm run cleanDist && tsc -p tsconfig.json && npm run copyXSD&& npm run copyTTF",
     "copyXSD": "copyfiles -u 1 src/**/*.xsd lib/",
     "copyTTF": "copyfiles -u 1 src/**/*.ttf lib/",
     "emissaoNFCE": "ts-node-dev --respawn --transpile-only ./src/testes/nfce/emissao.ts",
