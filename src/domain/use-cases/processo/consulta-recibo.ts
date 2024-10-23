@@ -30,7 +30,7 @@ export async function consultaRecibo(response: SoapRequest.Output, uf: string, c
         } while (retornoConsulta === undefined && (_tentativa < tentativas));
 
         return retornoConsulta;
-    } catch (ex) {
+    } catch (ex: any) {
         throw new Error(ex.message);
     }
 }

@@ -1,4 +1,4 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
+import {  type GeneratePdf } from '../../../../domain/contracts/repos';
 import { linhaHorizontalTracejada } from './linha-horizontal-tracejada';
 import { normal } from './normal';
 import { DEFAULT_NFE } from './default';
@@ -55,14 +55,20 @@ export async function gerarItens({
             const keys = Object.keys(item.imposto);
             for (let i = 0; i < keys.length; i++) {
                 if (keys[i].includes('ICMS') && !keys[i].includes('UFDest')) {
+                    //@ts-ignore
                     const newKeys = Object.keys(item.imposto[keys[i]]);
+                    //@ts-ignore
                     normal({ doc, value: item.imposto[keys[i]][newKeys[0]].CST ? `${item.imposto[keys[i]][newKeys[0]].orig}${item.imposto[keys[i]][newKeys[0]].CST}` : '', x: 270, y, largura: 21, alinhamento: 'center', tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens, ajusteX, ajusteY, margemEsquerda, margemTopo });
+                    //@ts-ignore
                     normal({ doc, value: item.imposto[keys[i]][newKeys[0]].CSOSN ? `${item.imposto[keys[i]][newKeys[0]].orig}${item.imposto[keys[i]][newKeys[0]].CSOSN}` : '', x: 270, y, largura: 21, alinhamento: 'center', tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens, ajusteX, ajusteY, margemEsquerda, margemTopo });
                     maiorY = Math.max(maiorY, pdf.y);
+                    //@ts-ignore
                     normal({ doc, value: item.imposto[keys[i]][newKeys[0]].vBC ?? Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(Number(0)), x: 443, y, largura: 32.5, alinhamento: 'center', tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens, ajusteX, ajusteY, margemEsquerda, margemTopo });
                     maiorY = Math.max(maiorY, pdf.y);
+                    //@ts-ignore
                     normal({ doc, value: item.imposto[keys[i]][newKeys[0]].vICMS ?? Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(Number(0)), x: 476, y, largura: 32, alinhamento: 'center', tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens, ajusteX, ajusteY, margemEsquerda, margemTopo });
                     maiorY = Math.max(maiorY, pdf.y);
+                    //@ts-ignore
                     normal({ doc, value: item.imposto[keys[i]][newKeys[0]].pICMS ?? Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(Number(0)), x: 532, y: y + 0.65, largura: 28, alinhamento: 'center', tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens, ajusteX, ajusteY, margemEsquerda, margemTopo });
                     maiorY = Math.max(maiorY, pdf.y);
                 }

@@ -1,6 +1,6 @@
 export function jsonOneLevel(obj: any): string {
-    const result = {};
-    
+    const result: Record<string, string> = {}; // Explicitly define result as Record<string, string>
+
     for (const k of Object.keys(obj)) {
         let logStr = obj[k]?.toString() ?? 'null'; 
         
@@ -8,7 +8,7 @@ export function jsonOneLevel(obj: any): string {
             logStr = logStr.substring(0, 499);
         }
         
-        result[k] = logStr;
+        result[k] = logStr; 
     }
     
     return JSON.stringify(result);

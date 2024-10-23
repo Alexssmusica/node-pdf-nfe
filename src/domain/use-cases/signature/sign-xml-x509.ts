@@ -10,6 +10,7 @@ export function signXmlX509(xml: string, tag: string, empresa: Empresa): string 
     const infoProvider = (pem: string) => {
         return {
             getKeyInfo() {
+                //@ts-ignore
                 const cert = this.getCert();
                 return `<X509Data><X509Certificate>${cert}</X509Certificate></X509Data>`;
             },
