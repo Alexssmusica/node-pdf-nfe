@@ -1,6 +1,6 @@
 export declare namespace CertificateLoad {
     type Input = {
-        path: string;
+        buffer: string;
         password: string;
     };
     type Output = {
@@ -12,4 +12,18 @@ export declare namespace CertificateLoad {
             cnpj: string;
         };
     };
+}
+export declare namespace CertificateFromPathLoad {
+    type Input = {
+        path: string;
+        password: string;
+    };
+    type Output = CertificateLoad.Output;
+}
+export declare namespace CertificateFromBase64Load {
+    type Input = {
+        base64: string;
+        password: string;
+    };
+    type Output = CertificateLoad.Output;
 }

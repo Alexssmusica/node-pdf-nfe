@@ -1,33 +1,8 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SefazNFe = void 0;
-const autorizadores = __importStar(require("../../application/helpers/urls/autorizadoresNFe.json"));
-const soap_info_1 = require("../../application/abstract/soap-info");
-class SefazNFe extends soap_info_1.SoapAbsctract {
-    static getAutorizadorByUF(uf) {
+import { SoapAbsctract } from '../../application/abstract/soap-info';
+import * as autorizadores from '../../application/helpers/urls/autorizadoresNFe.json';
+
+export class SefazNFe extends SoapAbsctract {
+    static getAutorizadorByUF(uf: string): any {
         switch (uf) {
             case 'AM':
                 return autorizadores.AM;
@@ -73,7 +48,8 @@ class SefazNFe extends soap_info_1.SoapAbsctract {
                 throw new Error('Autorizador não encontrado!');
         }
     }
-    static getAutorizadorContingenciaByUF(uf) {
+
+    static getAutorizadorContingenciaByUF(uf: string): any {
         switch (uf) {
             case 'AC':
             case 'AL':
@@ -109,5 +85,3 @@ class SefazNFe extends soap_info_1.SoapAbsctract {
         }
     }
 }
-exports.SefazNFe = SefazNFe;
-//# sourceMappingURL=sefazNfe.js.map
