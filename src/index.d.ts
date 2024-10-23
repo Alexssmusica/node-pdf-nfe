@@ -1,0 +1,10 @@
+import './main/config/module-alias';
+declare const carregaCertificado: import("./domain/use-cases/load-certificate").LoadCertificate;
+export { carregaCertificado };
+export { emitir } from './domain/use-cases/processo/emissao';
+export { statusServico } from './domain/use-cases/processo/status';
+export { inutilizar } from './domain/use-cases/processo/inutiliza';
+export { cartaCorrecao } from './domain/use-cases/processo/carta-correcao';
+export { cancelar } from './domain/use-cases/processo/cancelar';
+export { gerarPDF } from './domain/use-cases/pdf';
+export * from './domain/use-cases/utils';

@@ -29,7 +29,7 @@ function getDestinatarioRemetente({ y, doc, ajusteX, ajusteY, margemDireita, mar
     (0, titulo_1.titulo)({ value: 'DATA DA EMISSÃO', x: 495, y: y + 11, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     (0, campo_1.campo)({ value: (0, date_fns_1.format)((0, date_fns_1.parseISO)(ide.dhEmi), 'dd/MM/yyyy HH:mm:ss'), x: 495, y: y + 18, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     (0, titulo_1.titulo)({ value: 'ENDEREÇO', x: 1.5, y: y + 30, largura: 272, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    (0, campo_1.campo)({ value: dest.enderDest?.xLgr ?? '', x: 1.5, y: y + 38, largura: 272, alinhamento: 'left', tamanho: default_1.DEFAULT_NFE.tamanhoDaFonteDoCampo - 0.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    (0, campo_1.campo)({ value: dest.enderDest?.xLgr && dest.enderDest?.nro ? `${dest.enderDest.xLgr}, ${dest.enderDest.nro}` : dest.enderDest?.xLgr ?? '', x: 1.5, y: y + 38, largura: 272, alinhamento: 'left', tamanho: default_1.DEFAULT_NFE.tamanhoDaFonteDoCampo - 0.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     (0, titulo_1.titulo)({ value: 'BAIRRO / DISTRITO', x: 276, y: y + 30, largura: 192, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     (0, campo_1.campo)({ value: dest.enderDest?.xBairro ?? '', x: 276, y: y + 38, largura: 119, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     (0, titulo_1.titulo)({ value: 'CEP', x: 398, y: y + 30, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
