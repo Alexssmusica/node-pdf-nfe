@@ -1,0 +1,58 @@
+{
+  "name": "@alexssmusica/node-pdf-nfe",
+  "version": "1.1.1",
+  "description": "Modulo que auxilia na geração de NFe e NFCe",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Alex Santos de Souza"
+  },
+  "files": [
+    "/lib",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "NFe",
+    "NFCe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alexssmusica/node-pdf-nfe.git"
+  },
+  "scripts": {
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "cleanLib": "npx rimraf lib",
+    "build": "npm run cleanLib && tsc -p tsconfig.json && npm run copyTTF",
+    "prettier": "prettier src/**/*.{js,ts} --write",
+    "type": "tsc --project tsconfig.json",
+    "copyTTF": "copyfiles -u 1 src/**/*.ttf lib/"
+  },
+  "dependencies": {
+    "bwip-js": "4.2.0",
+    "date-fns": "2.29.3",
+    "pdfkit": "0.15.0",
+    "qrcode": "1.5.4",
+    "xml2js": "0.6.2"
+  },
+  "devDependencies": {
+    "@types/date-fns": "2.6.0",
+    "@types/node": "18.15.2",
+    "@types/pdfkit": "0.12.12",
+    "@types/qrcode": "1.5.5",
+    "@types/xml2js": "0.4.14",
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
+    "copyfiles": "2.4.1",
+    "eslint": "7.25.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "3.4.0",
+    "prettier": "2.2.1",
+    "rimraf": "5.0.0",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.5"
+  }
+}
