@@ -4,10 +4,10 @@ Biblioteca para geração Danfe NF-e/NFC-e em aplicações node.js
 ## Instalação
 Basta instalar através dos comandos
 ```bash
-    npm install @alexssmusica/node-pdf-nfe
+npm install @alexssmusica/node-pdf-nfe
 ```
 ```bash
-    yarn add @alexssmusica/node-pdf-nfe
+yarn add @alexssmusica/node-pdf-nfe
 ```
 
 ## Exemplo
