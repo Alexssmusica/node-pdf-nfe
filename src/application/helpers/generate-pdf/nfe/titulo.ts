@@ -1,4 +1,4 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
+import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 
 export function titulo({
@@ -12,7 +12,7 @@ export function titulo({
     ajusteX,
     ajusteY,
     alinhamento,
-    tamanho,
+    tamanho
 }: GeneratePdf.InputTitulo): void {
     x = margemEsquerda + ajusteX + x;
     y = margemTopo + ajusteY + y;
@@ -21,6 +21,6 @@ export function titulo({
         .fontSize(tamanho ?? DEFAULT_NFE.tamanhoDaFonteDoTitulo)
         .text(value.toUpperCase(), x, y, {
             width: largura,
-            align: alinhamento ?? DEFAULT_NFE.alinhamentoDoTitulo,
+            align: alinhamento ?? DEFAULT_NFE.alinhamentoDoTitulo
         });
 }

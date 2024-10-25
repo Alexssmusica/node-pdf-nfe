@@ -1,18 +1,7 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
+import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 
-export function secao({
-    ajusteX,
-    ajusteY,
-    doc,
-    largura,
-    margemEsquerda,
-    margemTopo,
-    value,
-    x,
-    y,
-    tamanho,
-}: GeneratePdf.InputSecao): void {
+export function secao({ ajusteX, ajusteY, doc, largura, margemEsquerda, margemTopo, value, x, y, tamanho }: GeneratePdf.InputSecao): void {
     x = margemEsquerda + ajusteX + x;
     y = margemTopo + ajusteY + y;
     doc.font('negrito')
@@ -20,6 +9,6 @@ export function secao({
         .fontSize(tamanho ?? DEFAULT_NFE.tamanhoDaFonteDaSecao)
         .text(value.toUpperCase(), x, y, {
             width: largura,
-            align: 'left',
+            align: 'left'
         });
 }

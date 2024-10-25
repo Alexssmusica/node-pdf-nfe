@@ -1,21 +1,22 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
-import { linhaHorizontal } from './linha-horizontal';
-import { linhaVertical } from './linha-vertical';
-import { titulo } from './titulo';
+import { formatMoney } from '../../../../domain/use-cases/utils';
+import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
+import { linhaHorizontal } from './linha-horizontal';
+import { linhaVertical } from './linha-vertical';
 import { secao } from './secao';
+import { titulo } from './titulo';
 
 export function getTransporte({
-  y,
-  doc,
-  ajusteX,
-  ajusteY,
-  margemDireita,
-  margemEsquerda,
-  margemTopo,
-  larguraDoFormulario,
-  transp,
+    y,
+    doc,
+    ajusteX,
+    ajusteY,
+    margemDireita,
+    margemEsquerda,
+    margemTopo,
+    larguraDoFormulario,
+    transp
 }: GeneratePdf.InputTransporte): number {
     linhaHorizontal({ x1: 0, x2: 0, y: y + 8, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
     linhaHorizontal({ x1: 0, x2: 0, y: y + 28, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
@@ -34,34 +35,52 @@ export function getTransporte({
     linhaVertical({ y1: y + 8, y2: y + 68, x: larguraDoFormulario, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
     secao({ doc, value: 'TRANSPORTADOR / VOLUMES TRANSPORTADOS', x: 1.5, y, largura: 0, ajusteX, ajusteY, margemEsquerda, margemTopo });
     titulo({ value: 'NOME / RAZÃO SOCIAL', x: 1.5, y: y + 9.5, largura: 166.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    let tamanhoFonte = 6
-	if(transp.transporta?.xNome && transp.transporta?.xNome.length > 40){
-		tamanhoFonte = 5
-	}
-    campo({ value: transp.transporta?.xNome ?? '', x: 1.5, y: y + 17.5, largura: 166.5, alinhamento: 'left', tamanho: tamanhoFonte, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    let tamanhoFonte = 6;
+    if (transp.transporta?.xNome && transp.transporta?.xNome.length > 40) {
+        tamanhoFonte = 5;
+    }
+    campo({
+        value: transp.transporta?.xNome ?? '',
+        x: 1.5,
+        y: y + 17.5,
+        largura: 166.5,
+        alinhamento: 'left',
+        tamanho: tamanhoFonte,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo
+    });
     function ModFrete(value: string) {
         if (value === '0') {
             return 'Por conta do Remetente';
-        }
-        else if (value === '1') {
+        } else if (value === '1') {
             return 'Por conta do Destinatário';
-        }
-        else if (value === '2') {
+        } else if (value === '2') {
             return 'Por conta de Terceiros';
-        }
-        else if (value === '3') {
+        } else if (value === '3') {
             return 'Por conta do Remetente';
-        }
-        else if (value === '4') {
+        } else if (value === '4') {
             return 'Por conta do Destinatário';
-        }
-        else if (value === '9') {
+        } else if (value === '9') {
             return 'Sem Ocorrência de Transporte';
         }
         return 'VALOR NAO CADASTRADO';
     }
     titulo({ value: 'FRETE POR CONTA', x: 171.5, y: y + 9.5, largura: 85, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    campo({ value: ModFrete(transp.modFrete), x: 171.5, y: y + 17.5, largura: 85, ajusteX, ajusteY, doc, margemEsquerda, margemTopo, tamanho: 6 });
+    campo({
+        value: ModFrete(transp.modFrete),
+        x: 171.5,
+        y: y + 17.5,
+        largura: 85,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo,
+        tamanho: 6
+    });
     titulo({ value: 'CÓDIGO ANTT', x: 259.5, y: y + 9.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     campo({ value: transp.veicTransp?.RNTC ?? '', x: 259.5, y: y + 17.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     titulo({ value: 'PLACA DO VEÍCULO', x: 347.5, y: y + 9.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
@@ -72,7 +91,19 @@ export function getTransporte({
     campo({ value: transp.transporta?.CNPJ ?? '', x: 458, y: y + 17.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     campo({ value: transp.transporta?.CPF ?? '', x: 458, y: y + 17.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     titulo({ value: 'ENDEREÇO', x: 1.5, y: y + 30, largura: 254, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    campo({ value: transp.transporta?.xEnder ?? '', x: 1.5, y: y + 38.5, largura: 254, alinhamento: 'left', tamanho: DEFAULT_NFE.tamanhoDaFonteDoCampo - 0.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    campo({
+        value: transp.transporta?.xEnder ?? '',
+        x: 1.5,
+        y: y + 38.5,
+        largura: 254,
+        alinhamento: 'left',
+        tamanho: DEFAULT_NFE.tamanhoDaFonteDoCampo - 0.5,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo
+    });
     titulo({ value: 'MUNICÍPIO', x: 259.5, y: y + 30, largura: 172, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     campo({ value: transp.transporta?.xMun ?? '', x: 259.5, y: y + 38.5, largura: 172, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     titulo({ value: 'UF', x: 435.5, y: y + 30, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
@@ -88,8 +119,28 @@ export function getTransporte({
     titulo({ value: 'NUMERAÇÃO', x: 259.5, y: y + 50, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     campo({ value: transp.vol?.nVol ?? '', x: 259.5, y: y + 58, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     titulo({ value: 'PESO BRUTO', x: 358.5, y: y + 50, largura: 112.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    campo({ value: transp.vol?.pesoB ?? '', x: 358.5, y: y + 58, largura: 112.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    campo({
+        value: transp.vol?.pesoB ? formatMoney(transp.vol?.pesoB, 3) : '',
+        x: 358.5,
+        y: y + 58,
+        largura: 112.5,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo
+    });
     titulo({ value: 'PESO LÍQUIDO', x: 474.5, y: y + 50, largura: 110.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    campo({ value: transp.vol?.pesoL ?? '', x: 474.5, y: y + 58, largura: 110.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    campo({
+        value: transp.vol?.pesoL ? formatMoney(transp.vol?.pesoL, 3) : '',
+        x: 474.5,
+        y: y + 58,
+        largura: 110.5,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo
+    });
     return doc.y;
-  }
+}

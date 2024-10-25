@@ -1,10 +1,11 @@
 import { deserializeXml } from '../../../application/helpers/xml';
-import { pdfNFe } from './pdf-NFe';
+import type { NFeProc } from '../../../types';
 import { pdfNFCe } from './pdf-NFCe';
+import { pdfNFe } from './pdf-NFe';
 
 export async function gerarPDF(xmlNFe: string, pathLogo?: string): Promise<PDFKit.PDFDocument> {
     const nf = await deserializeXml(xmlNFe);
-    const nfeProc = nf.nfeProc;
+    const nfeProc = nf.nfeProc as NFeProc;
 
     if (!(nfeProc.NFe.infNFe.det instanceof Array)) {
         nfeProc.NFe.infNFe.det = [nfeProc.NFe.infNFe.det];

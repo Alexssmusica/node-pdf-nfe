@@ -1,15 +1,15 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
-import { getRecibo } from './get-recibo';
-import { getHomologacao } from './get-homologacao';
+import type { GeneratePdf } from '../../../../types';
+import { DEFAULT_NFE } from './default';
+import { getDadosAdicionais } from './get-dados-adicionais';
 import { getDadosEmitente } from './get-dados-emitente';
 import { getDestinatarioRemetente } from './get-destinatario-remetente';
+import { getFaturaDuplicata } from './get-fatura-duplicata';
+import { getHomologacao } from './get-homologacao';
 import { getImposto } from './get-imposto';
-import { getTransporte } from './get-transporte';
 import { getIss } from './get-iss';
 import { getMenuItens } from './get-menu-itens';
-import { getDadosAdicionais } from './get-dados-adicionais';
-import { DEFAULT_NFE } from './default';
-import { getFaturaDuplicata } from './get-fatura-duplicata';
+import { getRecibo } from './get-recibo';
+import { getTransporte } from './get-transporte';
 
 export async function criaLayout({
     pathLogo,

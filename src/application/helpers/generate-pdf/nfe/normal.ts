@@ -1,4 +1,4 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
+import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 
 export function normal({
@@ -12,7 +12,7 @@ export function normal({
     x,
     y,
     alinhamento,
-    tamanho,
+    tamanho
 }: GeneratePdf.InputNormal): void {
     doc.font('normal')
         .fillColor(DEFAULT_NFE.corDoTitulo)
@@ -20,6 +20,6 @@ export function normal({
         .text(value ?? '', margemEsquerda + ajusteX + x, margemTopo + ajusteY + y, {
             width: largura,
             align: alinhamento ?? 'center',
-            lineGap: -1.5,
+            lineGap: -1.5
         });
 }

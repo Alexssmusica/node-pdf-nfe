@@ -1,4 +1,4 @@
-import { type GeneratePdf } from '../../../../domain/contracts/repos';
+import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 
 export function campo({

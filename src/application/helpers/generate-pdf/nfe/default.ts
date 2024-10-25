@@ -21,4 +21,3 @@ export const DEFAULT_NFE = {
     finalTamanhoDet1: 752,
     finalTamanhoDetDemais: 822
 } as const;
-
