@@ -1,6 +1,6 @@
 {
     "name": "@alexssmusica/node-pdf-nfe",
-    "version": "1.0.61",
+    "version": "1.0.62",
     "description": "Modulo que auxilia na geração de NFe e NFCe",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -33,17 +33,16 @@
         "copyTTF": "copyfiles -u 1 src/**/*.ttf lib/"
     },
     "dependencies": {
-        "bwip-js": "3.4.0",
+        "bwip-js": "4.2.0",
         "date-fns": "2.29.3",
         "pdfkit": "0.15.0",
         "qrcode": "1.5.4",
         "xml2js": "0.6.2"
     },
     "devDependencies": {
-        "@types/bwip-js": "^3.2.0",
         "@types/date-fns": "2.6.0",
         "@types/node": "18.15.2",
-        "@types/pdfkit": "0.13.5",
+        "@types/pdfkit": "0.12.12",
         "@types/qrcode": "1.5.5",
         "@types/xml2js": "0.4.14",
         "@typescript-eslint/eslint-plugin": "4.22.0",
