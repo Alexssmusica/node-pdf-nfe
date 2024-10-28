@@ -1,7 +1,7 @@
 {
   "name": "@alexssmusica/node-pdf-nfe",
   "version": "1.1.1",
-  "description": "Modulo que auxilia na geração de NFe e NFCe",
+  "description": "Modulo que auxilia na geração da Danfe NFe e NFCe",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -15,21 +15,24 @@
   ],
   "keywords": [
     "NFe",
-    "NFCe"
+    "NFCe",
+    "Danfe"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Alexssmusica/node-pdf-nfe.git"
   },
+  "homepage": "https://github.com/Alexssmusica/node-pdf-nfe/#readme",
   "scripts": {
-    "version": "npm run format && git add -A src",
+    "version": "npm run prettier && git add -A src",
     "postversion": "git push && git push --tags",
-    "test": "jest --passWithNoTests --no-cache --runInBand",
-    "cleanLib": "npx rimraf lib",
-    "build": "npm run cleanLib && tsc -p tsconfig.json && npm run copyTTF",
+    "clean-lib": "npx rimraf lib",
+    "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
     "type": "tsc --project tsconfig.json",
-    "copyTTF": "copyfiles -u 1 src/**/*.ttf lib/"
+    "copy-fonts": "copyfiles -u 1 src/**/*.ttf lib/",
+    "test-pdf": "ts-node-dev --respawn --transpile-only ./test/pdf.test.ts",
+    "test": "ts-node ./test/pdf.test.ts"
   },
   "dependencies": {
     "bwip-js": "4.2.0",
@@ -53,6 +56,7 @@
     "prettier": "2.2.1",
     "rimraf": "5.0.0",
     "ts-node": "10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "4.9.5"
   }
 }
