@@ -1,7 +1,7 @@
 {
   "name": "@alexssmusica/node-pdf-nfe",
-  "version": "1.1.2",
-  "description": "Modulo que auxilia na geração da Danfe NFe e NFCe",
+  "version": "1.1.3",
+  "description": "Modulo que auxilia na geração da Danfe NFe e NFCe.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
