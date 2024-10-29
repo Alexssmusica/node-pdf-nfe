@@ -1,6 +1,6 @@
 {
   "name": "@alexssmusica/node-pdf-nfe",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Modulo que auxilia na geração da Danfe NFe e NFCe",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,11 +24,12 @@
   },
   "homepage": "https://github.com/Alexssmusica/node-pdf-nfe/#readme",
   "scripts": {
-    "version": "npm run prettier && git add -A src",
-    "postversion": "git push && git push --tags",
+    "version": "npm run prettier && npm run build && git add -A src",
+    "postversion": "git push && git push --tags && npm run publish",
     "clean-lib": "npx rimraf lib",
     "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
+    "publish": "npm publish --access public",
     "type": "tsc --project tsconfig.json",
     "copy-fonts": "copyfiles -u 1 src/**/*.ttf lib/",
     "test-pdf": "ts-node-dev --respawn --transpile-only ./test/pdf.test.ts",
