@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns';
-import { formatStateRegistration } from '../../../../domain/use-cases/utils';
+import { formatPostalCode, formatStateRegistration } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -94,7 +94,17 @@ export function getDestinatarioRemetente({
   campo({ value: dest.enderDest?.xBairro ?? '', x: 276, y: y + 38, largura: 119, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
 
   titulo({ value: 'CEP', x: 398, y: y + 30, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: dest.enderDest?.CEP ?? '', x: 398, y: y + 38, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatPostalCode(dest.enderDest?.CEP ?? ''),
+    x: 398,
+    y: y + 38,
+    largura: 93,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
 
   titulo({ value: 'DATA DA SAÍDA', x: 495, y: y + 30, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({

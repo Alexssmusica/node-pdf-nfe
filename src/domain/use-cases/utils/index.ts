@@ -7,3 +7,4 @@ export * from './format-number';
 export * from './format-phone';
 export * from './format-postal-code';
 export * from './format-state-registration';
+export * from './return-font-size-carrier';

@@ -5,7 +5,7 @@ import { loadFontsNFCe } from '../../../application/helpers/generate-pdf/nfe/loa
 import { negrito } from '../../../application/helpers/generate-pdf/nfe/negrito';
 import { normal } from '../../../application/helpers/generate-pdf/nfe/normal';
 import type { NFeProc } from '../../../types';
-import { formatNumber } from '../utils';
+import { formatNumber, formatPostalCode } from '../utils';
 
 export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PDFDocument> {
   const { NFe, protNFe } = nf;
@@ -53,7 +53,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     doc,
     value: `${emit.enderEmit.xLgr}, ${emit.enderEmit.nro}${emit.enderEmit.xCpl !== undefined ? ' ' + emit.enderEmit.xCpl : ''}. ${
       emit.enderEmit.xBairro
-    }, ${emit.enderEmit.xMun}-${emit.enderEmit.UF}. ${emit.enderEmit.CEP}`,
+    }, ${emit.enderEmit.xMun}-${emit.enderEmit.UF}. ${formatPostalCode(emit.enderEmit.CEP ?? '')}`,
     x: 0,
     y: doc.y,
     largura: larguraPagina,

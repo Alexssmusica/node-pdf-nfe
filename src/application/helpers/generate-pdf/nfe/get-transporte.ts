@@ -1,4 +1,4 @@
-import { formatNumber, formatStateRegistration } from '../../../../domain/use-cases/utils';
+import { formatNumber, formatStateRegistration, returnFontSizeCarrier } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -35,17 +35,13 @@ export function getTransporte({
   linhaVertical({ y1: y + 8, y2: y + 68, x: larguraDoFormulario, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
   secao({ doc, value: 'TRANSPORTADOR / VOLUMES TRANSPORTADOS', x: 1.5, y, largura: 0, ajusteX, ajusteY, margemEsquerda, margemTopo });
   titulo({ value: 'NOME / RAZÃO SOCIAL', x: 1.5, y: y + 9.5, largura: 166.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  let tamanhoFonte = 6;
-  if (transp.transporta?.xNome && transp.transporta?.xNome.length > 40) {
-    tamanhoFonte = 5;
-  }
   campo({
     value: transp.transporta?.xNome ?? '',
     x: 1.5,
     y: y + 17.5,
     largura: 166.5,
     alinhamento: 'left',
-    tamanho: tamanhoFonte,
+    tamanho: returnFontSizeCarrier(transp.transporta?.xNome ?? ''),
     ajusteX,
     ajusteY,
     doc,
@@ -54,32 +50,32 @@ export function getTransporte({
   });
   function ModFrete(value: string) {
     if (value === '0') {
-      return 'Por conta do Remetente';
+      return '0 - Por conta do Remet';
     } else if (value === '1') {
-      return 'Por conta do Destinatário';
+      return '1 - Por conta do Dest';
     } else if (value === '2') {
-      return 'Por conta de Terceiros';
+      return '2 - Por conta de Terc';
     } else if (value === '3') {
-      return 'Por conta do Remetente';
+      return '3 - Por conta do Remet';
     } else if (value === '4') {
-      return 'Por conta do Destinatário';
+      return '4 - Por conta do Dest';
     } else if (value === '9') {
-      return 'Sem Ocorrência de Transporte';
+      return '9 - Sem Ocorr de Transp';
     }
-    return 'VALOR NAO CADASTRADO';
+    return '';
   }
   titulo({ value: 'FRETE POR CONTA', x: 171.5, y: y + 9.5, largura: 85, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
     value: ModFrete(transp.modFrete),
-    x: 171.5,
+    x: 164,
     y: y + 17.5,
-    largura: 85,
+    largura: 100,
     ajusteX,
     ajusteY,
     doc,
     margemEsquerda,
     margemTopo,
-    tamanho: 6
+    tamanho: 8.4
   });
   titulo({ value: 'CÓDIGO ANTT', x: 259.5, y: y + 9.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.veicTransp?.RNTC ?? '', x: 259.5, y: y + 17.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
