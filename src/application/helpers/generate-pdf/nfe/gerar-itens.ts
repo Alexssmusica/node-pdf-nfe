@@ -1,4 +1,4 @@
-import { formatMoney } from '../../../../domain/use-cases/utils';
+import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { criaLayout } from './cria-layout';
 import { DEFAULT_NFE } from './default';
@@ -108,7 +108,7 @@ export async function gerarItens({
       maiorY = Math.max(maiorY, pdf.y);
       normal({
         doc,
-        value: formatMoney(item.prod.qCom, 4),
+        value: formatNumber(item.prod.qCom, 4),
         x: 335,
         y,
         largura: 37,
@@ -122,7 +122,7 @@ export async function gerarItens({
       maiorY = Math.max(maiorY, pdf.y);
       normal({
         doc,
-        value: formatMoney(item.prod.vUnCom, 2),
+        value: formatNumber(item.prod.vUnCom, 2),
         x: 375,
         y,
         largura: 32.5,
@@ -136,7 +136,7 @@ export async function gerarItens({
       maiorY = Math.max(maiorY, pdf.y);
       normal({
         doc,
-        value: formatMoney(item.prod.vProd, 2),
+        value: formatNumber(item.prod.vProd, 2),
         x: 409.5,
         y,
         largura: 31,
@@ -186,7 +186,7 @@ export async function gerarItens({
           maiorY = Math.max(maiorY, pdf.y);
           normal({
             doc,
-            value: formatMoney(item.imposto[keys[i]][newKeys[0]].vBC ?? 0, 2),
+            value: formatNumber(item.imposto[keys[i]][newKeys[0]].vBC ?? 0, 2),
             x: 443,
             y,
             largura: 32.5,
@@ -200,7 +200,7 @@ export async function gerarItens({
           maiorY = Math.max(maiorY, pdf.y);
           normal({
             doc,
-            value: formatMoney(item.imposto[keys[i]][newKeys[0]].vICMS ?? 0, 2),
+            value: formatNumber(item.imposto[keys[i]][newKeys[0]].vICMS ?? 0, 2),
             x: 476,
             y,
             largura: 32,
@@ -214,7 +214,7 @@ export async function gerarItens({
           maiorY = Math.max(maiorY, pdf.y);
           normal({
             doc,
-            value: formatMoney(item.imposto[keys[i]][newKeys[0]].pICMS ?? 0, 2),
+            value: formatNumber(item.imposto[keys[i]][newKeys[0]].pICMS ?? 0, 2),
             x: 532,
             y: y + 0.65,
             largura: 28,
@@ -231,7 +231,7 @@ export async function gerarItens({
 
       normal({
         doc,
-        value: formatMoney(item.imposto.IPI?.IPITrib?.vIPI ?? 0, 2),
+        value: formatNumber(item.imposto.IPI?.IPITrib?.vIPI ?? 0, 2),
         x: 507.5,
         y,
         largura: 26,
@@ -245,7 +245,7 @@ export async function gerarItens({
       maiorY = Math.max(maiorY, pdf.y);
       normal({
         doc,
-        value: formatMoney(item.imposto.IPI?.IPITrib?.pIPI ?? 0, 2),
+        value: formatNumber(item.imposto.IPI?.IPITrib?.pIPI ?? 0, 2),
         x: 557.75,
         y,
         largura: 29,

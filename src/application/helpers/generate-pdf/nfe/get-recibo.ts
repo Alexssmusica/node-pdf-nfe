@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns';
-import { formatMoney } from '../../../../domain/use-cases/utils';
+import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { linhaHorizontal } from './linha-horizontal';
 import { linhaHorizontalTracejada } from './linha-horizontal-tracejada';
@@ -41,7 +41,7 @@ export function getRecibo({
       'Emissão:',
       format(parseISO(ide.dhEmi), 'dd/MM/yyyy HH:mm:ss'),
       '- Valor Total:',
-      formatMoney(total.ICMSTot.vNF, 2),
+      formatNumber(total.ICMSTot.vNF, 2),
       '- Destinatário:',
       dest.xNome,
       '- Endereço:',

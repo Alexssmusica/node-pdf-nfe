@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns';
-import { formatMoney } from '../../../../domain/use-cases/utils';
+import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 import { linhaHorizontal } from './linha-horizontal';
@@ -36,15 +36,15 @@ export function getFaturaDuplicata({
         .font('negrito')
         .text(' Valor Original:', { continued: true })
         .font('normal')
-        .text(` ${formatMoney(cobr.fat.vOrig, 2)}`, { continued: true })
+        .text(` ${formatNumber(cobr.fat.vOrig, 2)}`, { continued: true })
         .font('negrito')
         .text(' Valor Desconto:', { continued: true })
         .font('normal')
-        .text(` ${formatMoney(cobr.fat.vDesc, 2)}`, { continued: true })
+        .text(` ${formatNumber(cobr.fat.vDesc, 2)}`, { continued: true })
         .font('negrito')
         .text(' Valor Líquido:', { continued: true })
         .font('normal')
-        .text(` ${formatMoney(cobr.fat.vLiq, 2)}.`, { continued: true });
+        .text(` ${formatNumber(cobr.fat.vLiq, 2)}.`, { continued: true });
     }
 
     if (cobr.dup !== undefined) {
@@ -54,7 +54,7 @@ export function getFaturaDuplicata({
           .font('negrito')
           .text(' Valor:', { continued: true })
           .font('normal')
-          .text(` ${formatMoney(dup.vDup, 2)}`, { continued: true });
+          .text(` ${formatNumber(dup.vDup, 2)}`, { continued: true });
         doc
           .font('negrito')
           .text(' Vencimento:', { continued: true })

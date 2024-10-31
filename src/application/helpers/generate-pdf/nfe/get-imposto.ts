@@ -1,4 +1,4 @@
-import { formatMoney } from '../../../../domain/use-cases/utils';
+import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -34,7 +34,7 @@ export function getImposto({
 
   titulo({ value: 'BASE DE CÁLCULO DO ICMS', x: 1.5, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vBC, 2),
+    value: formatNumber(total.ICMSTot.vBC, 2),
     x: 1.5,
     y: y + 26.2,
     largura: 84,
@@ -47,7 +47,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR DO ICMS', x: 89, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vICMS, 2),
+    value: formatNumber(total.ICMSTot.vICMS, 2),
     x: 89,
     y: y + 26.2,
     largura: 84,
@@ -60,7 +60,7 @@ export function getImposto({
   });
   titulo({ value: 'BASE DE CÁLC. ICMS S.T.', x: 177, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vBCST, 2),
+    value: formatNumber(total.ICMSTot.vBCST, 2),
     x: 177,
     y: y + 26.2,
     largura: 84,
@@ -73,7 +73,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR DO ICMS SUBST.', x: 265, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vST, 2),
+    value: formatNumber(total.ICMSTot.vST, 2),
     x: 265,
     y: y + 26.2,
     largura: 84,
@@ -86,7 +86,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR IMP. IMPORTAÇÃO', x: 353, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vIPI, 2),
+    value: formatNumber(total.ICMSTot.vIPI, 2),
     x: 353,
     y: y + 26.2,
     largura: 84,
@@ -99,7 +99,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR DO PIS', x: 441, y: y + 17.2, largura: 47, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vPIS, 2),
+    value: formatNumber(total.ICMSTot.vPIS, 2),
     x: 441,
     y: y + 26.2,
     largura: 47,
@@ -112,7 +112,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR TOTAL DOS PRODUTOS', x: 492, y: y + 17.2, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vProd, 2),
+    value: formatNumber(total.ICMSTot.vProd, 2),
     x: 492,
     y: y + 26.2,
     largura: 93,
@@ -125,7 +125,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR DO FRETE', x: 1.5, y: y + 37.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vFrete, 2),
+    value: formatNumber(total.ICMSTot.vFrete, 2),
     x: 1.5,
     y: y + 46.2,
     largura: 84,
@@ -138,7 +138,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR DO SEGURO', x: 89, y: y + 37.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vSeg, 2),
+    value: formatNumber(total.ICMSTot.vSeg, 2),
     x: 89,
     y: y + 46.2,
     largura: 84,
@@ -151,7 +151,7 @@ export function getImposto({
   });
   titulo({ value: 'DESCONTO', x: 177, y: y + 37.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vDesc, 2),
+    value: formatNumber(total.ICMSTot.vDesc, 2),
     x: 177,
     y: y + 46.2,
     largura: 84,
@@ -164,7 +164,7 @@ export function getImposto({
   });
   titulo({ value: 'OUTRAS DESPESAS', x: 265, y: y + 37.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vOutro, 2),
+    value: formatNumber(total.ICMSTot.vOutro, 2),
     x: 265,
     y: y + 46.2,
     largura: 84,
@@ -177,7 +177,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR TOTAL DO IPI', x: 353, y: y + 37.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vIPI, 2),
+    value: formatNumber(total.ICMSTot.vIPI, 2),
     x: 353,
     y: y + 46.2,
     largura: 84,
@@ -201,7 +201,7 @@ export function getImposto({
     tamanho: DEFAULT_NFE.tamanhoDaFonteDoTitulo - 1
   });
   campo({
-    value: formatMoney(total.ICMSTot.vCOFINS, 2),
+    value: formatNumber(total.ICMSTot.vCOFINS, 2),
     x: 440.5,
     y: y + 46.2,
     largura: 47,
@@ -214,7 +214,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR TOTAL DA NOTA', x: 492, y: y + 37.2, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatMoney(total.ICMSTot.vNF, 2),
+    value: formatNumber(total.ICMSTot.vNF, 2),
     x: 492,
     y: y + 46.2,
     largura: 93,

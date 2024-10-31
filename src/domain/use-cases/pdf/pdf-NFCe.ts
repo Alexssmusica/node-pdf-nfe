@@ -5,7 +5,7 @@ import { loadFontsNFCe } from '../../../application/helpers/generate-pdf/nfe/loa
 import { negrito } from '../../../application/helpers/generate-pdf/nfe/negrito';
 import { normal } from '../../../application/helpers/generate-pdf/nfe/normal';
 import type { NFeProc } from '../../../types';
-import { formatMoney } from '../utils';
+import { formatNumber } from '../utils';
 
 export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PDFDocument> {
   const { NFe, protNFe } = nf;
@@ -199,7 +199,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     });
     normal({
       doc,
-      value: formatMoney(element.prod.qCom, 3),
+      value: formatNumber(element.prod.qCom, 3),
       x: 120,
       y: posicao,
       largura: 20,
@@ -212,7 +212,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     });
     normal({
       doc,
-      value: formatMoney(element.prod.vUnCom, 2),
+      value: formatNumber(element.prod.vUnCom, 2),
       x: 140,
       y: posicao,
       largura: 27,
@@ -225,7 +225,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     });
     normal({
       doc,
-      value: formatMoney(element.prod.vProd, 2),
+      value: formatNumber(element.prod.vProd, 2),
       x: 167,
       y: posicao,
       largura: larguraPagina - 167,
@@ -282,7 +282,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   doc.y -= 7;
   normal({
     doc,
-    value: formatMoney(total.ICMSTot.vProd, 2),
+    value: formatNumber(total.ICMSTot.vProd, 2),
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,
@@ -309,7 +309,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   doc.y -= 7;
   normal({
     doc,
-    value: formatMoney(total.ICMSTot.vDesc, 2),
+    value: formatNumber(total.ICMSTot.vDesc, 2),
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,
@@ -336,7 +336,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   doc.y -= 7;
   normal({
     doc,
-    value: formatMoney(total.ICMSTot.vFrete, 2),
+    value: formatNumber(total.ICMSTot.vFrete, 2),
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,
@@ -363,7 +363,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   doc.y -= 7;
   normal({
     doc,
-    value: formatMoney(total.ICMSTot.vNF, 2),
+    value: formatNumber(total.ICMSTot.vNF, 2),
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,
@@ -419,7 +419,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     doc.y -= 7;
     normal({
       doc,
-      value: formatMoney(element.vPag, 2),
+      value: formatNumber(element.vPag, 2),
       x: 0,
       y: doc.y,
       largura: larguraPagina - margemPadrao,
@@ -447,7 +447,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   doc.y -= 7;
   normal({
     doc,
-    value: formatMoney(pag.vTroco ?? 0, 2),
+    value: formatNumber(pag.vTroco ?? 0, 2),
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,

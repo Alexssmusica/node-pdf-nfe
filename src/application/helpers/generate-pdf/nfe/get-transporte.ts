@@ -1,4 +1,4 @@
-import { formatMoney } from '../../../../domain/use-cases/utils';
+import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -120,7 +120,7 @@ export function getTransporte({
   campo({ value: transp.vol?.nVol ?? '', x: 259.5, y: y + 58, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'PESO BRUTO', x: 358.5, y: y + 50, largura: 112.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: transp.vol?.pesoB ? formatMoney(transp.vol?.pesoB, 3) : '',
+    value: transp.vol?.pesoB ? formatNumber(transp.vol?.pesoB, 3) : '',
     x: 358.5,
     y: y + 58,
     largura: 112.5,
@@ -132,7 +132,7 @@ export function getTransporte({
   });
   titulo({ value: 'PESO LÍQUIDO', x: 474.5, y: y + 50, largura: 110.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: transp.vol?.pesoL ? formatMoney(transp.vol?.pesoL, 3) : '',
+    value: transp.vol?.pesoL ? formatNumber(transp.vol?.pesoL, 3) : '',
     x: 474.5,
     y: y + 58,
     largura: 110.5,
