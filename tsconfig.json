@@ -36,6 +36,6 @@
     "dist",
     "build",
     "lib",
-    "test"
+    "tests"
   ],
 }

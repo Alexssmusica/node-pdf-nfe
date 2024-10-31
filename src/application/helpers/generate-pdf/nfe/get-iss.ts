@@ -29,7 +29,18 @@ export function getIss({
     secao({ doc, value: 'CÁLCULO DO ISSQN', x: 1.5, y: 754.5, largura: 0, ajusteX, ajusteY, margemEsquerda, margemTopo });
 
     titulo({ value: 'INSCRIÇÃO MUNICIPAL', x: 1.5, y: 763, largura: 132.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-    campo({ value: emit.IE, x: 1.5, y: 771, largura: 132.5, alinhamento: 'left', ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+    campo({
+      value: emit?.IM ?? '',
+      x: 1.5,
+      y: 771,
+      largura: 132.5,
+      alinhamento: 'left',
+      ajusteX,
+      ajusteY,
+      doc,
+      margemEsquerda,
+      margemTopo
+    });
 
     titulo({ value: 'VALOR TOTAL DOS SERVIÇOS', x: 137.5, y: 763, largura: 132.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
     campo({

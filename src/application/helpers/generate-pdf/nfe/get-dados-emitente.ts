@@ -1,5 +1,6 @@
 import bwipjs from 'bwip-js';
 import { format, parseISO } from 'date-fns';
+import { formatKey, formatStateRegistration } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -251,7 +252,7 @@ export async function getDadosEmitente({
   doc.image(barcodeCep, 350, y + 22.7, { fit: [230, 50] });
   titulo({ value: 'CHAVE DE ACESSO', x: 341.5, y: y + 61.2, largura: 244, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: protNFe.infProt.chNFe.replace(/(.{4})(?=.)/g, '$1 '),
+    value: formatKey(protNFe.infProt.chNFe),
     x: 341.5,
     y: y + 67.7,
     largura: 244,
@@ -287,7 +288,7 @@ export async function getDadosEmitente({
   campo({ value: ide.natOp, x: 1.5, y: y + 114.1, largura: 338, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 1.5, y: y + 126.7, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: emit.IE.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1.$2.$3.$4'),
+    value: formatStateRegistration(emit.IE),
     x: 1.5,
     y: y + 134.1,
     largura: 192.5,
@@ -308,7 +309,17 @@ export async function getDadosEmitente({
     margemEsquerda,
     margemTopo
   });
-  campo({ value: emit.iEST ?? '', x: 197, y: y + 134.1, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatStateRegistration(emit.iEST ?? '') ?? '',
+    x: 197,
+    y: y + 134.1,
+    largura: 192.5,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   titulo({ value: 'CNPJ', x: 392.5, y: y + 126.7, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
     value: emit.CNPJ?.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5') ?? '',

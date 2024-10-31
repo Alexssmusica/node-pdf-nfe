@@ -1,4 +1,4 @@
-import { formatNumber } from '../../../../domain/use-cases/utils';
+import { formatNumber, formatStateRegistration } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -109,7 +109,17 @@ export function getTransporte({
   titulo({ value: 'UF', x: 435.5, y: y + 30, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.transporta?.uf ?? '', x: 435.5, y: y + 38.5, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 458, y: y + 30, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: transp.transporta?.ie ?? '', x: 458, y: y + 38.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatStateRegistration(transp.transporta?.ie ?? ''),
+    x: 458,
+    y: y + 38.5,
+    largura: 126.5,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   titulo({ value: 'QUANTIDADE', x: 1.5, y: y + 50, largura: 56.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.vol?.qVol ?? '', x: 1.5, y: y + 58, largura: 56.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'ESPÉCIE', x: 60.8, y: y + 50, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });

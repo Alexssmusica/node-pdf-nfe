@@ -5,5 +5,5 @@
  * @return     {string}
  */
 export function formatKey(key: string): string {
-  return key.replace(/(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11');
+  return key.replace(/(.{4})(?=.)/g, '$1 ');
 }

@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import { formatStateRegistration } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -130,7 +131,7 @@ export function getDestinatarioRemetente({
 
   titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 398, y: y + 51, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: dest?.IE?.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1.$2.$3.$4') ?? '',
+    value: formatStateRegistration(dest?.IE ?? ''),
     x: 398,
     y: y + 58,
     largura: 93,
