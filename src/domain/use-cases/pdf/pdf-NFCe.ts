@@ -5,7 +5,7 @@ import { loadFontsNFCe } from '../../../application/helpers/generate-pdf/nfe/loa
 import { negrito } from '../../../application/helpers/generate-pdf/nfe/negrito';
 import { normal } from '../../../application/helpers/generate-pdf/nfe/normal';
 import type { NFeProc } from '../../../types';
-import { formatNumber, formatPostalCode } from '../utils';
+import { formatCnpj, formatCpf, formatNumber, formatPostalCode } from '../utils';
 
 export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PDFDocument> {
   const { NFe, protNFe } = nf;
@@ -39,7 +39,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   });
   negrito({
     doc,
-    value: emit.CNPJ.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
+    value: formatCnpj(emit.CNPJ),
     x: 0,
     y: doc.y,
     largura: larguraPagina,
@@ -516,7 +516,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   if (dest?.CNPJ !== undefined) {
     normal({
       doc,
-      value: 'CNPJ: ' + dest.CNPJ?.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
+      value: 'CNPJ: ' + formatCnpj(dest.CNPJ),
       x: doc.x,
       y: doc.y,
       largura: 112,
@@ -530,7 +530,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   } else if (dest?.CPF !== undefined) {
     normal({
       doc,
-      value: 'CPF: ' + dest.CPF?.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
+      value: 'CPF: ' + formatCpf(dest.CPF),
       x: doc.x,
       y: doc.y,
       largura: 112,

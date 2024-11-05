@@ -1,5 +1,12 @@
-import { format, parseISO } from 'date-fns';
-import { formatPostalCode, formatStateRegistration } from '../../../../domain/use-cases/utils';
+import {
+  formatCnpj,
+  formatCpf,
+  formatDate,
+  formatPhone,
+  formatPostalCode,
+  formatStateRegistration
+} from '../../../../domain/use-cases/utils';
+import { formatTime } from '../../../../domain/use-cases/utils/format-time';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -40,7 +47,7 @@ export function getDestinatarioRemetente({
 
   titulo({ value: 'CNPJ / CPF', x: 358, y: y + 11, largura: 133.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: dest.CPF?.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') ?? '',
+    value: formatCpf(dest.CPF ?? ''),
     x: 358,
     y: y + 18,
     largura: 133.5,
@@ -51,7 +58,7 @@ export function getDestinatarioRemetente({
     margemTopo
   });
   campo({
-    value: dest.CNPJ?.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5') ?? '',
+    value: formatCnpj(dest.CNPJ ?? ''),
     x: 358,
     y: y + 18,
     largura: 133.5,
@@ -64,7 +71,7 @@ export function getDestinatarioRemetente({
 
   titulo({ value: 'DATA DA EMISSÃO', x: 495, y: y + 11, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: format(parseISO(ide.dhEmi), 'dd/MM/yyyy HH:mm:ss'),
+    value: formatDate(ide.dhEmi),
     x: 495,
     y: y + 18,
     largura: 90,
@@ -108,7 +115,7 @@ export function getDestinatarioRemetente({
 
   titulo({ value: 'DATA DA SAÍDA', x: 495, y: y + 30, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: ide.dhSaiEnt !== undefined ? format(parseISO(ide.dhSaiEnt), 'dd/MM/yyyy HH:mm:ss') : '',
+    value: ide.dhSaiEnt !== undefined ? formatDate(ide.dhSaiEnt) : '',
     x: 495,
     y: y + 38,
     largura: 90,
@@ -137,7 +144,17 @@ export function getDestinatarioRemetente({
   campo({ value: dest.enderDest?.UF ?? '', x: 276, y: y + 58, largura: 20, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
 
   titulo({ value: 'FONE / FAX', x: 299, y: y + 51, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: dest.enderDest?.fone ?? '', x: 299, y: y + 58, largura: 96, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatPhone(dest.enderDest?.fone ?? ''),
+    x: 299,
+    y: y + 58,
+    largura: 96,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
 
   titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 398, y: y + 51, largura: 93, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
@@ -153,6 +170,17 @@ export function getDestinatarioRemetente({
   });
 
   titulo({ value: 'HORA DA SAÍDA', x: 495, y: y + 51, largura: 90, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: ide.dhSaiEnt !== undefined ? formatTime(ide.dhSaiEnt) : '',
+    x: 495,
+    y: y + 58,
+    largura: 90,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
 
   return doc.y;
 }

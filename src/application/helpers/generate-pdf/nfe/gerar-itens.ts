@@ -156,7 +156,7 @@ export async function gerarItens({
           normal({
             doc,
             value: item.imposto[keys[i]][newKeys[0]].CST
-              ? `${item.imposto[keys[i]][newKeys[0]].orig}${item.imposto[keys[i]][newKeys[0]].CST}`
+              ? `${item.imposto[keys[i]][newKeys[0]].orig}/${item.imposto[keys[i]][newKeys[0]].CST}`
               : '',
             x: 270,
             y,
@@ -171,7 +171,7 @@ export async function gerarItens({
           normal({
             doc,
             value: item.imposto[keys[i]][newKeys[0]].CSOSN
-              ? `${item.imposto[keys[i]][newKeys[0]].orig}${item.imposto[keys[i]][newKeys[0]].CSOSN}`
+              ? `${item.imposto[keys[i]][newKeys[0]].orig}/${item.imposto[keys[i]][newKeys[0]].CSOSN}`
               : '',
             x: 270,
             y,

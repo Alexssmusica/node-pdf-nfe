@@ -1,4 +1,5 @@
-import { formatNumber, formatStateRegistration, returnFontSizeCarrier } from '../../../../domain/use-cases/utils';
+import { formatCnpj, formatCpf, formatNumber, formatStateRegistration, returnFontSizeCarrier } from '../../../../domain/use-cases/utils';
+import { formatLicensePlate } from '../../../../domain/use-cases/utils/format-plate';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -80,12 +81,42 @@ export function getTransporte({
   titulo({ value: 'CÓDIGO ANTT', x: 259.5, y: y + 9.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.veicTransp?.RNTC ?? '', x: 259.5, y: y + 17.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'PLACA DO VEÍCULO', x: 347.5, y: y + 9.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: transp.veicTransp?.placa ?? '', x: 347.5, y: y + 17.5, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatLicensePlate(transp.veicTransp?.placa ?? ''),
+    x: 347.5,
+    y: y + 17.5,
+    largura: 84,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   titulo({ value: 'UF', x: 435.5, y: y + 9.5, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.veicTransp?.UF ?? '', x: 435.5, y: y + 17.5, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'CNPJ / CPF', x: 458, y: y + 9.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: transp.transporta?.CNPJ ?? '', x: 458, y: y + 17.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: transp.transporta?.CPF ?? '', x: 458, y: y + 17.5, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({
+    value: formatCnpj(transp.transporta?.CNPJ ?? ''),
+    x: 458,
+    y: y + 17.5,
+    largura: 126.5,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
+  campo({
+    value: formatCpf(transp.transporta?.CPF ?? ''),
+    x: 458,
+    y: y + 17.5,
+    largura: 126.5,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   titulo({ value: 'ENDEREÇO', x: 1.5, y: y + 30, largura: 254, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
     value: transp.transporta?.xEnder ?? '',

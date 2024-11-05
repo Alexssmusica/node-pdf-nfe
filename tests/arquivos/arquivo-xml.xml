@@ -9,8 +9,8 @@
         <mod>55</mod>
         <serie>1</serie>
         <nNF>1</nNF>
-        <dhEmi>2024-01-01T00:00:00-03:00</dhEmi>
-        <dhSaiEnt>2024-01-01T00:00:00-03:00</dhSaiEnt>
+        <dhEmi>2024-01-31T00:00:00-03:00</dhEmi>
+        <dhSaiEnt>2024-01-31T00:00:00-03:00</dhSaiEnt>
         <tpNF>1</tpNF>
         <idDest>2</idDest>
         <cMunFG>4201307</cMunFG>
@@ -57,6 +57,7 @@
           <CEP>80000000</CEP>
           <cPais>1058</cPais>
           <xPais>Brasil</xPais>
+          <fone>0000000000</fone>
         </enderDest>
         <indIEDest>1</indIEDest>
         <IE>000000000</IE>
@@ -2321,7 +2322,7 @@
         </transporta>
         <veicTransp>
           <UF>SC</UF>
-          <placa>AAA0000</placa>
+          <placa>AAA0D00</placa>
         </veicTransp>
         <vol>
           <qVol>39</qVol>

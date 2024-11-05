@@ -1,6 +1,7 @@
 import bwipjs from 'bwip-js';
-import { format, parseISO } from 'date-fns';
-import { formatKey, formatStateRegistration } from '../../../../domain/use-cases/utils';
+import { formatCnpj, formatKey, formatPhone, formatStateRegistration } from '../../../../domain/use-cases/utils';
+import { formatDateTime } from '../../../../domain/use-cases/utils/format-date-time';
+import { formatProtocol } from '../../../../domain/use-cases/utils/format-protocol';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
@@ -126,10 +127,10 @@ export async function getDadosEmitente({
     margemTopo
   });
 
-  if (emit.fone !== undefined) {
+  if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
     normal({
       doc,
-      value: 'Telefone: ' + emit.fone,
+      value: 'Telefone: ' + formatPhone(emit.enderEmit.fone),
       x: identificacaoDoEmitenteX,
       y: doc.y - margemTopo + 2,
       largura: identificacaoDoEmitenteLargura,
@@ -274,7 +275,7 @@ export async function getDadosEmitente({
     margemTopo
   });
   campo({
-    value: `${protNFe.infProt.nProt.replace(/(.{3})(?=.)/g, '$1 ')} - ${format(parseISO(protNFe.infProt.dhRecbto), 'dd/MM/yyyy HH:mm:ss')}`,
+    value: `${formatProtocol(protNFe.infProt.nProt)} - ${formatDateTime(protNFe.infProt.dhRecbto)}`,
     x: 341.5,
     y: y + 114.1,
     largura: 244,
@@ -322,7 +323,7 @@ export async function getDadosEmitente({
   });
   titulo({ value: 'CNPJ', x: 392.5, y: y + 126.7, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: emit.CNPJ?.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5') ?? '',
+    value: formatCnpj(emit.CNPJ ?? ''),
     x: 392.5,
     y: y + 134.1,
     largura: 192.5,
