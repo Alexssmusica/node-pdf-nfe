@@ -8,7 +8,8 @@ export function getHomologacao({
   margemEsquerda,
   margemTopo,
   larguraDoFormulario,
-  protNFe
+  protNFe,
+  cancelada
 }: GeneratePdf.InputHomologacao): void {
   doc
     .font('normal')
@@ -34,6 +35,18 @@ export function getHomologacao({
         align: 'center'
       }
     );
+
+  if (cancelada) {
+    doc
+      .font('normal')
+      .fillColor(DEFAULT_NFE.corDoTitulo)
+      .fontSize(38)
+      .fillOpacity(DEFAULT_NFE.opacidadeDaHomologacao)
+      .text('CANCELADA', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + 300 + DEFAULT_NFE.ajusteYDaHomologacao, {
+        width: larguraDoFormulario,
+        align: 'center'
+      });
+  }
 
   doc.fillOpacity(100);
 }

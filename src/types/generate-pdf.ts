@@ -10,6 +10,11 @@ import type {
 } from '.';
 import type { NFeProc, ProtNFe } from './nfe-proc';
 
+export type OpcoesPDF = {
+  pathLogo?: string;
+  cancelada?: boolean;
+};
+
 export declare namespace GeneratePdf {
   type InputLinhaHorizontal = {
     x1: number;
@@ -43,6 +48,7 @@ export declare namespace GeneratePdf {
     larguraDoFormulario: number;
     nf: NFeProc;
     pathLogo?: string;
+    cancelada?: boolean;
   };
   type InputCriaLayout = {
     doc: PDFKit.PDFDocument;
@@ -55,6 +61,7 @@ export declare namespace GeneratePdf {
     nf: NFeProc;
     folha: number;
     pathLogo?: string;
+    cancelada?: boolean;
   };
   type InputTitulo = {
     x: number;
@@ -141,6 +148,15 @@ export declare namespace GeneratePdf {
     ajusteY: number;
     larguraDoFormulario: number;
     protNFe: ProtNFe;
+    cancelada?: boolean;
+  };
+  type InputNotaCancelada = {
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
   };
   type InputRecibo = {
     y: number;

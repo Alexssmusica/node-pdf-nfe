@@ -3,20 +3,31 @@ import { gerarItens } from '../../../application/helpers/generate-pdf/nfe/gerar-
 import { italico } from '../../../application/helpers/generate-pdf/nfe/italico';
 import { loadFonts } from '../../../application/helpers/generate-pdf/nfe/load-fontes';
 import { optionsDocNFe } from '../../../application/helpers/generate-pdf/nfe/options-doc';
-import type { NFeProc } from '../../../types';
+import type { NFeProc, OpcoesPDF } from '../../../types';
 
 const margemTopo = 2.8;
 const margemEsquerda = 3;
 const margemDireita = 589.65;
 const larguraDoFormulario = margemDireita - margemEsquerda;
 
-export async function pdfNFe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PDFDocument> {
+export async function pdfNFe(nf: NFeProc, opcoes?: OpcoesPDF): Promise<PDFKit.PDFDocument> {
   const ajusteY = 0;
   const ajusteX = 0;
   const doc = new PDFKit(optionsDocNFe);
-
   loadFonts(doc);
-  await gerarItens({ ajusteX, ajusteY, nf, doc, larguraDoFormulario, margemDireita, margemEsquerda, margemTopo, pathLogo });
+
+  await gerarItens({
+    ajusteX,
+    ajusteY,
+    nf,
+    doc,
+    larguraDoFormulario,
+    margemDireita,
+    margemEsquerda,
+    margemTopo,
+    pathLogo: opcoes?.pathLogo,
+    cancelada: opcoes?.cancelada
+  });
 
   const paginas = doc.bufferedPageRange();
   for (let i = paginas.start; i < paginas.start + paginas.count; i++) {

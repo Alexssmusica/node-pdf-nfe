@@ -8,6 +8,7 @@ import { getHomologacao } from './get-homologacao';
 import { getImposto } from './get-imposto';
 import { getIss } from './get-iss';
 import { getMenuItens } from './get-menu-itens';
+import { getNotaCancelada } from './get-nota-cancelada';
 import { getRecibo } from './get-recibo';
 import { getTransporte } from './get-transporte';
 
@@ -21,7 +22,8 @@ export async function criaLayout({
   margemTopo,
   larguraDoFormulario,
   margemDireita,
-  folha
+  folha,
+  cancelada
 }: GeneratePdf.InputCriaLayout): Promise<void> {
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
@@ -35,8 +37,11 @@ export async function criaLayout({
       margemEsquerda,
       margemTopo,
       larguraDoFormulario,
-      protNFe: nf.protNFe
+      protNFe: nf.protNFe,
+      cancelada
     });
+  } else if (ide.tpAmb === '1' && cancelada) {
+    getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario });
   }
 
   if (folha === 0) {
