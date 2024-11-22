@@ -160,7 +160,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     posicao = doc.y;
     normal({
       doc,
-      value: element.prod.cProd.padStart(9, '0'),
+      value: element.prod.cProd.padStart(9, '0').substring(0, 9),
       x: 0 + margemPadrao,
       y: posicao,
       largura: 28,
@@ -173,7 +173,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     });
     normal({
       doc,
-      value: ajusteTamanhoTexto(doc, 'NOTA FISCAL EMITIDA EM AMB', 73.5),
+      value: ajusteTamanhoTexto(doc, ide.tpAmb === '1' ? element.prod.xProd.substring(0, 26) : 'NOTA FISCAL EMITIDA EM AMB', 73.5),
       x: 31,
       y: posicao,
       largura: 73.5,
