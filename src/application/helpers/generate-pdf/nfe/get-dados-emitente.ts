@@ -1,7 +1,12 @@
 import bwipjs from 'bwip-js';
-import { formatCnpj, formatKey, formatPhone, formatStateRegistration } from '../../../../domain/use-cases/utils';
-import { formatDateTime } from '../../../../domain/use-cases/utils/format-date-time';
-import { formatProtocol } from '../../../../domain/use-cases/utils/format-protocol';
+import {
+  formatCnpj,
+  formatDateTime,
+  formatKey,
+  formatPhone,
+  formatProtocol,
+  formatStateRegistration
+} from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';

@@ -4,9 +4,9 @@ import {
   formatDate,
   formatPhone,
   formatPostalCode,
-  formatStateRegistration
+  formatStateRegistration,
+  formatTime
 } from '../../../../domain/use-cases/utils';
-import { formatTime } from '../../../../domain/use-cases/utils/format-time';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';

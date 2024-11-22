@@ -1,5 +1,11 @@
-import { formatCnpj, formatCpf, formatNumber, formatStateRegistration, returnFontSizeCarrier } from '../../../../domain/use-cases/utils';
-import { formatLicensePlate } from '../../../../domain/use-cases/utils/format-plate';
+import {
+  formatCnpj,
+  formatCpf,
+  formatLicensePlate,
+  formatNumber,
+  formatStateRegistration,
+  returnFontSizeCarrier
+} from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
