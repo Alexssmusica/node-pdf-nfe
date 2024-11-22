@@ -16,7 +16,7 @@ import { gerarPDF } from '@alexssmusica/node-pdf-nfe';
 import fs from 'fs';
 
 const xml = fs.readFileSync('/path/to/file.xml').toString();
-const logo = '/path/to/logo';
-const doc = await gerarPDF(xml, logo);
+const pathLogo = '/path/to/logo';
+const doc = await gerarPDF(xml, { pathLogo, cancelada: false });
 doc.pipe(fs.createWriteStream('/path/to/file.pdf'));
 ```
