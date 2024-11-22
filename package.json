@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/Alexssmusica/node-pdf-nfe.git"
   },
-  "homepage": "https://github.com/Alexssmusica/node-pdf-nfe/#readme",
+  "homepage": "https://danfenfeonline.com.br/gerar-danfe",
   "scripts": {
     "version": "npm run prettier && npm run build && git add -A src",
     "postversion": "git push && git push --tags && npm run publish",
