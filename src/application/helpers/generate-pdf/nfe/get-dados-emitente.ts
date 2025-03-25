@@ -316,7 +316,7 @@ export async function getDadosEmitente({
     margemTopo
   });
   campo({
-    value: formatStateRegistration(emit.iEST ?? '') ?? '',
+    value: formatStateRegistration(emit.IEST ?? '') ?? '',
     x: 197,
     y: y + 134.1,
     largura: 192.5,

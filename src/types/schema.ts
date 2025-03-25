@@ -593,7 +593,7 @@ export interface TNFeInfNFeEmit {
   enderEmit: TEnderEmi;
   fone?: string;
   IE: string;
-  iEST?: string;
+  IEST?: string;
   IM: string;
   CNAE?: string;
   CRT: TNFeInfNFeEmitCRT;
