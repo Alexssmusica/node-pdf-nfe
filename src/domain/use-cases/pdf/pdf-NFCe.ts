@@ -611,7 +611,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   });
   normal({
     doc,
-    value: infAdic.infCpl ?? '',
+    value: infAdic?.infCpl ?? '',
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,

@@ -46,7 +46,7 @@ export function getDadosAdicionais({
     margemTopo
   });
 
-  const informacoesComplementares = [infAdic.infCpl];
+  const informacoesComplementares = [infAdic?.infCpl];
 
   normal({
     doc,
