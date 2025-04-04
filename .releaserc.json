@@ -1,0 +1,29 @@
+{
+    "branches": [
+        "dev",
+        "master"
+    ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/github",
+        "@semantic-release/changelog",
+        [
+            "@semantic-release/npm",
+            {
+                "npmPublish": false
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "package.json",
+                    "package-lock.json",
+                    "CHANGELOG.md"
+                ],
+                "message": "chore(release): update version v${nextRelease.version}"
+            }
+        ]
+    ]
+}
