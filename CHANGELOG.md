@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.0...v1.2.1) (2025-04-04)
+
+
+### Bug Fixes
+
+* .npmignore ([2011bb9](https://github.com/Alexssmusica/node-pdf-nfe/commit/2011bb9de89740e4c660d008987d1eaf2ba79347))
+
 # [1.2.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.1.10...v1.2.0) (2025-04-04)
 
 
