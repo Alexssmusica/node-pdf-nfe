@@ -24,7 +24,7 @@
   },
   "homepage": "https://danfenfeonline.com.br/gerar-danfe",
   "scripts": {
-    "release:dev": "semantic-release --no-ci",
+    "release": "node release.js",
     "version": "npm run prettier && npm run build && git add -A src",
     "postversion": "git push && git push --tags && npm run publish",
     "clean-lib": "npx rimraf lib",
