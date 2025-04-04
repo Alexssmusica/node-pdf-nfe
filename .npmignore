@@ -11,6 +11,7 @@ release.js
 .eslintrc.js
 .prebuildrc
 prettier.config.js
+lib/tsconfig.tsbuildinfo
 .eslintignore
 node_modules/
 teste.js
