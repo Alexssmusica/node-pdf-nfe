@@ -28,7 +28,7 @@
     "clean-lib": "npx rimraf lib",
     "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
-    "publish": "npm adduser && npm publish --access public",
+    "publish": "npm publish --access public",
     "type": "tsc --project tsconfig.json",
     "copy-fonts": "copyfiles -u 1 src/**/*.ttf lib/",
     "test-pdf": "ts-node-dev --respawn --transpile-only ./tests/pdf.test.ts",
