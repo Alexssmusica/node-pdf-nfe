@@ -86,7 +86,7 @@ export function getImposto({
   });
   titulo({ value: 'VALOR IMP. IMPORTAÇÃO', x: 353, y: y + 17.2, largura: 84, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatNumber(total.ICMSTot.vIPI, 2),
+    value: formatNumber(total.ICMSTot.vII, 2),
     x: 353,
     y: y + 26.2,
     largura: 84,
