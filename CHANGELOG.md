@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.2...v1.2.3) (2025-04-25)
+
+
+### Bug Fixes
+
+* repository url ([4909f1d](https://github.com/Alexssmusica/node-pdf-nfe/commit/4909f1dbd9ae7d1d9a00be069ac389fdb56ac29b))
+
 ## [1.2.2](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.1...v1.2.2) (2025-04-25)
 
 
