@@ -6,7 +6,9 @@
   "types": "lib/index.d.ts",
   "license": "MIT",
   "author": {
-    "name": "Alex Santos de Souza"
+    "name": "Alex Santos de Souza",
+    "url": "https://github.com/Alexssmusica/node-pdf-nfe/#readme",
+    "email": "alexssmusica@gmail.com"
   },
   "files": [
     "/lib",
@@ -20,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alexssmusica/node-pdf-nfe.git"
+    "url":  "git+https://github.com/Alexssmusica/node-pdf-nfe.git"
   },
   "homepage": "https://danfenfeonline.com.br/gerar-danfe",
   "scripts": {
