@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.1...v1.2.2) (2025-04-25)
+
+
+### Bug Fixes
+
+* **get-imposto.ts:** correção do campo de Imposto de Importação ([f9c13f2](https://github.com/Alexssmusica/node-pdf-nfe/commit/f9c13f224d60dc136113e57fc18f22ee80182d8f))
+
 ## [1.2.1](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.0...v1.2.1) (2025-04-04)
 
 
