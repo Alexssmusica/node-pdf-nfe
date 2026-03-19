@@ -1,5 +1,4 @@
-import { format, parseISO } from 'date-fns';
-import { formatNumber } from '../../../../domain/use-cases/utils';
+import { formatDateTime, formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { linhaHorizontal } from './linha-horizontal';
 import { linhaHorizontalTracejada } from './linha-horizontal-tracejada';
@@ -39,7 +38,7 @@ export function getRecibo({
       'os produtos e/ou serviços constantes da nota',
       'fiscal eletrônica indicada abaixo.',
       'Emissão:',
-      format(parseISO(ide.dhEmi), 'dd/MM/yyyy HH:mm:ss'),
+      formatDateTime(ide.dhEmi),
       '- Valor Total:',
       formatNumber(total.ICMSTot.vNF, 2),
       '- Destinatário:',
