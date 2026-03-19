@@ -1,3 +1,11 @@
+## [1.2.4](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.3...v1.2.4) (2026-03-19)
+
+
+### Bug Fixes
+
+* corrige fuso do dhEmi com formatDateTime ([2dfbc98](https://github.com/Alexssmusica/node-pdf-nfe/commit/2dfbc98ff1ad4ab98216e0c01ecc088e18fe9330))
+* corrige fuso do dhEmi com formatDateTime ([5cca74c](https://github.com/Alexssmusica/node-pdf-nfe/commit/5cca74c957bd804d2df3b31dcc69f7b623afba6f))
+
 ## [1.2.3](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.2...v1.2.3) (2025-04-25)
 
 
