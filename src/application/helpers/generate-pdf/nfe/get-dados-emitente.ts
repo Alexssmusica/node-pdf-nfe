@@ -1,9 +1,10 @@
-import bwipjs from 'bwip-js';
+import Bwipjs from '@bwip-js/node';
 import {
   formatCnpj,
   formatDateTime,
   formatKey,
   formatPhone,
+  formatPostalCode,
   formatProtocol,
   formatStateRegistration
 } from '../../../../domain/use-cases/utils';
@@ -132,6 +133,22 @@ export async function getDadosEmitente({
     margemTopo
   });
 
+  if (emit.enderEmit && emit.enderEmit.CEP !== undefined) {
+    normal({
+      doc,
+      value: 'CEP: ' + formatPostalCode(emit.enderEmit.CEP),
+      x: identificacaoDoEmitenteX,
+      y: doc.y - margemTopo + 2,
+      largura: identificacaoDoEmitenteLargura,
+      alinhamento: 'center',
+      tamanho: 6 + identificacaoDoEmitenteFonte,
+      ajusteX,
+      ajusteY,
+      margemEsquerda,
+      margemTopo
+    });
+  }
+
   if (emit.enderEmit && emit.enderEmit.fone !== undefined) {
     normal({
       doc,
@@ -254,7 +271,7 @@ export async function getDadosEmitente({
     height: 15,
     width: 130
   };
-  const barcodeCep = await bwipjs.toBuffer(options);
+  const barcodeCep = await Bwipjs.toBuffer(options);
   doc.image(barcodeCep, 350, y + 22.7, { fit: [230, 50] });
   titulo({ value: 'CHAVE DE ACESSO', x: 341.5, y: y + 61.2, largura: 244, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({

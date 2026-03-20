@@ -4,14 +4,14 @@ import QRCode from 'qrcode';
 import { loadFontsNFCe } from '../../../application/helpers/generate-pdf/nfe/load-fontes';
 import { negrito } from '../../../application/helpers/generate-pdf/nfe/negrito';
 import { normal } from '../../../application/helpers/generate-pdf/nfe/normal';
-import type { NFeProc } from '../../../types';
+import type { NFeProc, OpcoesPDF } from '../../../types';
 import { formatCnpj, formatCpf, formatNumber, formatPostalCode } from '../utils';
 
-export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PDFDocument> {
+export async function pdfNFCe(nf: NFeProc, opcoes?: OpcoesPDF): Promise<PDFKit.PDFDocument> {
   const { NFe, protNFe } = nf;
   const { infProt } = protNFe;
   const { ide, emit, det, total, pag, dest, infAdic } = NFe.infNFe;
-  const larguraPagina = 201;
+  const larguraPagina = 207.5;
   const margemPadrao = 2.5;
 
   const doc = new PDFKit({
@@ -611,7 +611,7 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
   });
   normal({
     doc,
-    value: infAdic?.infCpl ?? '',
+    value: infAdic.infCpl ?? '',
     x: 0,
     y: doc.y,
     largura: larguraPagina - margemPadrao,
@@ -623,8 +623,8 @@ export async function pdfNFCe(nf: NFeProc, pathLogo?: string): Promise<PDFKit.PD
     alinhamento: 'center'
   });
   const qrImage = await QRCode.toDataURL(NFe.infNFeSupl?.qrCode ?? '');
-  doc.image(qrImage, larguraPagina / 2 - 45, doc.y, { fit: [90, 90], align: 'center' });
-  doc.end();
+  doc.image(qrImage, larguraPagina / 2 - 45, doc.y + 5, { fit: [90, 90], align: 'center' });
+  if (!opcoes || !opcoes.notEndDocument) doc.end();
   return doc;
 }
 

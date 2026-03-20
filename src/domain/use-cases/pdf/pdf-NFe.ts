@@ -47,6 +47,6 @@ export async function pdfNFe(nf: NFeProc, opcoes?: OpcoesPDF): Promise<PDFKit.PD
     });
   }
   doc.flushPages();
-  doc.end();
+  if (!opcoes || !opcoes.notEndDocument) doc.end();
   return doc;
 }

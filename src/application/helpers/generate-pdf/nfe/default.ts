@@ -1,4 +1,6 @@
-export const DEFAULT_NFE = {
+import { DefaultNfe } from '../../../../types';
+
+export const DEFAULT_NFE: DefaultNfe = {
   larguraDaPagina: 595.44,
   alturaDaPagina: 841.68,
   tamanhoDaFonteDoTitulo: 6,
@@ -20,4 +22,4 @@ export const DEFAULT_NFE = {
   corDoLayout: 'black',
   finalTamanhoDet1: 752,
   finalTamanhoDetDemais: 822
-} as const;
+};

@@ -22,6 +22,6 @@ export async function gerarPDF(xmlNFe: string, opcoes?: OpcoesPDF): Promise<PDFK
   if (nfeProc.NFe.infNFe.ide.mod === '55') {
     return await pdfNFe(nfeProc, opcoes);
   } else {
-    return await pdfNFCe(nfeProc, opcoes?.pathLogo);
+    return await pdfNFCe(nfeProc, opcoes);
   }
 }

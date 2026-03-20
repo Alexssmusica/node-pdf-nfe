@@ -13,6 +13,33 @@ import type { NFeProc, ProtNFe } from './nfe-proc';
 export type OpcoesPDF = {
   pathLogo?: string;
   cancelada?: boolean;
+  notEndDocument?: boolean;
+};
+
+export type Alinhamento = PDFKit.Mixins.TextOptions['align'];
+
+export type DefaultNfe = {
+  larguraDaPagina: number;
+  alturaDaPagina: number;
+  tamanhoDaFonteDoTitulo: number;
+  corDoTitulo: string;
+  alinhamentoDoTitulo: Alinhamento;
+  alinhamentoDoTituloDaTabela: Alinhamento;
+  tamanhoDaFonteDaSecao: number;
+  corDaSecao: string;
+  tamanhoDaFonteDoCampo: number;
+  alinhamentoDoCampo: Alinhamento;
+  corDoCampo: string;
+  tamanhoDaFonteDosItens: number;
+  separadorDeItens: boolean;
+  ajusteYDoLogotipo: number;
+  ajusteYDaIdentificacaoDoEmitente: number;
+  opacidadeDaHomologacao: number;
+  ajusteYDaHomologacao: number;
+  tamanhoDoCodigoDeBarras: number;
+  corDoLayout: string;
+  finalTamanhoDet1: number;
+  finalTamanhoDetDemais: number;
 };
 
 export declare namespace GeneratePdf {
@@ -73,7 +100,7 @@ export declare namespace GeneratePdf {
     margemTopo: number;
     ajusteX: number;
     ajusteY: number;
-    alinhamento?: string;
+    alinhamento?: Alinhamento;
     tamanho?: number;
   };
   type InputNormal = {
@@ -86,7 +113,7 @@ export declare namespace GeneratePdf {
     margemTopo: number;
     ajusteX: number;
     ajusteY: number;
-    alinhamento?: string;
+    alinhamento?: Alinhamento;
     tamanho?: number;
   };
   type InputCampo = {
@@ -99,7 +126,7 @@ export declare namespace GeneratePdf {
     margemTopo: number;
     ajusteX: number;
     ajusteY: number;
-    alinhamento?: string;
+    alinhamento?: Alinhamento;
     tamanho?: number;
   };
   type InputNegrito = {
@@ -112,7 +139,7 @@ export declare namespace GeneratePdf {
     margemTopo: number;
     ajusteX: number;
     ajusteY: number;
-    alinhamento?: string;
+    alinhamento?: Alinhamento;
     tamanho?: number;
   };
   type InputItalico = {
@@ -125,7 +152,7 @@ export declare namespace GeneratePdf {
     margemTopo: number;
     ajusteX: number;
     ajusteY: number;
-    alinhamento?: string;
+    alinhamento?: Alinhamento;
     tamanho?: number;
   };
   type InputSecao = {
