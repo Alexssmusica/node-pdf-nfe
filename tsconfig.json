@@ -15,7 +15,7 @@
       "useDefineForClassFields": false,
       "isolatedModules": true,
       "esModuleInterop": true,
-      "declaration": false,
+      "declaration": true,
       "composite": false,
       "removeComments": true,
       "noImplicitAny": false,
