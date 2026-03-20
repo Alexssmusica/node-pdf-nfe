@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.9...v1.2.10) (2026-03-20)
+
+
+### Bug Fixes
+
+* valor imposto importaçao ([c116a15](https://github.com/Alexssmusica/node-pdf-nfe/commit/c116a15877a55c198a089d8c766309db46bac787))
+
 ## [1.2.9](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.8...v1.2.9) (2026-03-20)
 
 
