@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.4...v1.2.5) (2026-03-20)
+
+
+### Bug Fixes
+
+* update libs, e ajustes nao funcoes ([84f78af](https://github.com/Alexssmusica/node-pdf-nfe/commit/84f78af3fa1dcd802d7851ae82e6c2de4326b868))
+
 ## [1.2.4](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.3...v1.2.4) (2026-03-19)
 
 
