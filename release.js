@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-require('dotenv').config();
+require('dotenv').config({quiet: true});
 
 try {
     if (!process.env.GH_TOKEN) {
@@ -18,4 +18,4 @@ try {
 } catch (error) {
     console.error('Erro durante o processo de release:', error.message);
     process.exit(1);
-} 
+}
