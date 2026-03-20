@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.7...v1.2.8) (2026-03-20)
+
+
+### Bug Fixes
+
+* lint arquivos ([744c129](https://github.com/Alexssmusica/node-pdf-nfe/commit/744c12960ed8455a6bd890c634ca68affd419ab7))
+
 ## [1.2.7](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.6...v1.2.7) (2026-03-20)
 
 
