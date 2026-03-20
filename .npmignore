@@ -24,4 +24,3 @@ src/
 tsconfig.json
 tsconfig-build.json
 tsconfig-build.tsbuildinfo
-lib/tsconfig.tsbuildinfo
