@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.10...v1.2.11) (2026-03-22)
+
+
+### Bug Fixes
+
+* erro danfe nfce sem dados adcionais ([c7c776d](https://github.com/Alexssmusica/node-pdf-nfe/commit/c7c776d66606532e21aa470a87d7d05fc818e96e))
+
 ## [1.2.10](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.9...v1.2.10) (2026-03-20)
 
 
