@@ -26,11 +26,11 @@
   },
   "homepage": "https://danfenfeonline.com.br/gerar-danfe",
   "scripts": {
-    "release": "npm run prettier && npm run build && node release.js",
+    "release": "npm run prettier && npm run build && node release.js && npm run publish:npm",
     "clean-lib": "npx rimraf lib",
     "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
-    "publish": "node publish.js",
+    "publish:npm": "node publish.js",
     "type": "tsc --project tsconfig.json",
     "copy-fonts": "copyfiles src/**/*.ttf lib/ -u 1",
     "test-pdf": "nodemon --watch src ./tests/pdf.test.ts",

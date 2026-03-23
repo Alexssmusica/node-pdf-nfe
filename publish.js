@@ -8,12 +8,16 @@ try {
   console.log('Publicando no npm...');
   execSync('npm publish --access public', {
     stdio: 'inherit',
-    env: {
+    env:{
       ...process.env,
+      NPM_TOKEN: process.env.NPM_TOKEN
     }
   });
   console.log('Publicação concluída com sucesso!');
 } catch (error) {
+  if (typeof error.status === 'number') {
+    process.exit(error.status);
+  }
   console.error('Erro durante a publicação:', error.message);
   process.exit(1);
 }
