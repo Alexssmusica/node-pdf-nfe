@@ -176,6 +176,7 @@ export declare namespace GeneratePdf {
     larguraDoFormulario: number;
     protNFe: ProtNFe;
     cancelada?: boolean;
+    folha?: number;
   };
   type InputNotaCancelada = {
     doc: PDFKit.PDFDocument;
@@ -184,6 +185,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    folha?: number;
   };
   type InputRecibo = {
     y: number;

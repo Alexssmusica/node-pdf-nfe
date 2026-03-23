@@ -1,6 +1,10 @@
 import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
 
+const OFFSET_BASE_PRIMEIRA_PAGINA = 310;
+const OFFSET_BASE_DEMAIS_PAGINAS = 145;
+const ESPACAMENTO_MARCAS = 50;
+
 export function getHomologacao({
   doc,
   ajusteX,
@@ -9,14 +13,20 @@ export function getHomologacao({
   margemTopo,
   larguraDoFormulario,
   protNFe,
-  cancelada
+  cancelada,
+  folha = 0
 }: GeneratePdf.InputHomologacao): void {
+  const baseOffset = folha === 0 ? OFFSET_BASE_PRIMEIRA_PAGINA : OFFSET_BASE_DEMAIS_PAGINAS;
+  const y1 = baseOffset - ESPACAMENTO_MARCAS + DEFAULT_NFE.ajusteYDaHomologacao;
+  const y2 = baseOffset + DEFAULT_NFE.ajusteYDaHomologacao;
+  const y3 = baseOffset + ESPACAMENTO_MARCAS + DEFAULT_NFE.ajusteYDaHomologacao;
+
   doc
     .font('normal')
     .fillColor(DEFAULT_NFE.corDoTitulo)
     .fontSize(38)
     .fillOpacity(DEFAULT_NFE.opacidadeDaHomologacao)
-    .text('EMITIDA EM HOMOLOGAÇÃO', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + 200 + DEFAULT_NFE.ajusteYDaHomologacao, {
+    .text('EMITIDA EM HOMOLOGAÇÃO', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + y1, {
       width: larguraDoFormulario,
       align: 'center'
     });
@@ -29,7 +39,7 @@ export function getHomologacao({
     .text(
       protNFe !== undefined ? 'SEM VALOR FISCAL' : 'NÃO ENVIADA PARA SEFAZ',
       margemEsquerda + ajusteX + 0,
-      margemTopo + ajusteY + 250 + DEFAULT_NFE.ajusteYDaHomologacao,
+      margemTopo + ajusteY + y2,
       {
         width: larguraDoFormulario,
         align: 'center'
@@ -42,7 +52,7 @@ export function getHomologacao({
       .fillColor(DEFAULT_NFE.corDoTitulo)
       .fontSize(38)
       .fillOpacity(DEFAULT_NFE.opacidadeDaHomologacao)
-      .text('CANCELADA', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + 300 + DEFAULT_NFE.ajusteYDaHomologacao, {
+      .text('CANCELADA', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + y3, {
         width: larguraDoFormulario,
         align: 'center'
       });

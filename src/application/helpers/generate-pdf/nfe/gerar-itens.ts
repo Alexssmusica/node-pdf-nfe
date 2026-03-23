@@ -38,7 +38,7 @@ export async function gerarItens({
     const item = nf.NFe.infNFe.det[i];
 
     function renderizarLinha(pdf: any): number {
-      const y = maiorY + 2;
+      const y = maiorY + 3;
       normal({
         doc,
         value: item.prod.cProd,
@@ -259,7 +259,7 @@ export async function gerarItens({
         margemTopo
       });
       maiorY = Math.max(maiorY, pdf.y);
-      return Number(maiorY) + (DEFAULT_NFE.separadorDeItens !== undefined ? 2 : 0);
+      return Number(maiorY) + (DEFAULT_NFE.separadorDeItens !== undefined ? 3 : 0);
     }
 
     maiorY = renderizarLinha(doc);
@@ -283,7 +283,7 @@ export async function gerarItens({
       maiorY = doc.y;
     } else {
       if (DEFAULT_NFE.separadorDeItens !== undefined) {
-        linhaHorizontalTracejada({ x1: 0, x2: 0, y: maiorY - 1, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+        linhaHorizontalTracejada({ x1: 0, x2: 0, y: maiorY, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
       }
     }
   }

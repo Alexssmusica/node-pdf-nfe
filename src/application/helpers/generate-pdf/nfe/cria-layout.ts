@@ -38,10 +38,11 @@ export async function criaLayout({
       margemTopo,
       larguraDoFormulario,
       protNFe: nf.protNFe,
-      cancelada
+      cancelada,
+      folha
     });
   } else if (ide.tpAmb === '1' && cancelada) {
-    getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario });
+    getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, folha });
   }
 
   if (folha === 0) {

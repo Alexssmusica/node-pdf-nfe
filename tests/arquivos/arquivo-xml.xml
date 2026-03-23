@@ -17,7 +17,7 @@
         <tpImp>1</tpImp>
         <tpEmis>1</tpEmis>
         <cDV>3</cDV>
-        <tpAmb>1</tpAmb>
+        <tpAmb>2</tpAmb>
         <finNFe>1</finNFe>
         <indFinal>0</indFinal>
         <indPres>0</indPres>
@@ -2362,11 +2362,41 @@
           <dVenc>2024-12-12</dVenc>
           <vDup>1756.05</vDup>
         </dup>
-        <dup>
+        <!-- <dup>
           <nDup>006</nDup>
           <dVenc>2024-12-27</dVenc>
           <vDup>1756.01</vDup>
         </dup>
+        <dup>
+          <nDup>007</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>175633.01</vDup>
+        </dup>
+        <dup>
+          <nDup>008</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>1756.01</vDup>
+        </dup> -->
+        <!-- <dup>
+          <nDup>009</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>1756.01</vDup>
+        </dup>
+        <dup>
+          <nDup>010</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>1756.01</vDup>
+        </dup>
+        <dup>
+          <nDup>011</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>1756.01</vDup>
+        </dup>
+        <dup>
+          <nDup>012</nDup>
+          <dVenc>2024-12-27</dVenc>
+          <vDup>1756.01</vDup>
+        </dup> -->
       </cobr>
       <pag>
         <detPag>
