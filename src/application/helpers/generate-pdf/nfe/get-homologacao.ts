@@ -36,15 +36,10 @@ export function getHomologacao({
     .fillColor(DEFAULT_NFE.corDoTitulo)
     .fontSize(25)
     .fillOpacity(DEFAULT_NFE.opacidadeDaHomologacao)
-    .text(
-      protNFe !== undefined ? 'SEM VALOR FISCAL' : 'NÃO ENVIADA PARA SEFAZ',
-      margemEsquerda + ajusteX + 0,
-      margemTopo + ajusteY + y2,
-      {
-        width: larguraDoFormulario,
-        align: 'center'
-      }
-    );
+    .text(protNFe !== undefined ? 'SEM VALOR FISCAL' : 'NÃO ENVIADA PARA SEFAZ', margemEsquerda + ajusteX + 0, margemTopo + ajusteY + y2, {
+      width: larguraDoFormulario,
+      align: 'center'
+    });
 
   if (cancelada) {
     doc
