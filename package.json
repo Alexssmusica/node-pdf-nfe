@@ -30,7 +30,7 @@
     "clean-lib": "npx rimraf lib",
     "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
-    "publish": "npm publish --access public",
+    "publish": "node publish.js",
     "type": "tsc --project tsconfig.json",
     "copy-fonts": "copyfiles src/**/*.ttf lib/ -u 1",
     "test-pdf": "nodemon --watch src ./tests/pdf.test.ts",
