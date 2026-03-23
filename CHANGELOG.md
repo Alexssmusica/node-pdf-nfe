@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.12...v1.2.13) (2026-03-23)
+
+
+### Bug Fixes
+
+* script de publicaçao ([fe243f0](https://github.com/Alexssmusica/node-pdf-nfe/commit/fe243f044937521392a29ac2298d858e1cdf1677))
+
 ## [1.2.12](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.11...v1.2.12) (2026-03-23)
 
 
