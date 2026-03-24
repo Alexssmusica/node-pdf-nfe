@@ -17,7 +17,8 @@ export function linhaHorizontal({
   x2 = margemDireita + ajusteX + x2;
 
   if (tracejada) {
-    doc.moveTo(x1, y).lineTo(x2, y).dash(3, { space: 5 }).stroke();
+    doc.lineWidth(0.1);
+    doc.moveTo(x1, y).lineTo(x2, y).dash(3, { space: 1 }).stroke();
     doc.undash();
   } else {
     doc.moveTo(x1, y).lineTo(x2, y).stroke();

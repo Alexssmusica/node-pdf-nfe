@@ -28,6 +28,7 @@ export async function criaLayout({
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
   const finalEspacoDet = folha === 0 ? DEFAULT_NFE.finalTamanhoDet1 : DEFAULT_NFE.finalTamanhoDetDemais;
+  const isCSOSN = emit.CRT === '4' || emit.CRT === '1';
 
   if (ide.tpAmb === '2') {
     getHomologacao({
@@ -163,6 +164,7 @@ export async function criaLayout({
     y,
     margemDireita,
     finalEspacoDet,
-    larguraDoFormulario
+    larguraDoFormulario,
+    isCSOSN
   });
 }

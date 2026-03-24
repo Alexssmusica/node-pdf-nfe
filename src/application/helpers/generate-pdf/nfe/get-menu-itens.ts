@@ -14,7 +14,8 @@ export function getMenuItens({
   margemTopo,
   margemDireita,
   finalEspacoDet,
-  larguraDoFormulario
+  larguraDoFormulario,
+  isCSOSN
 }: GeneratePdf.InputMenuItens): number {
   linhaHorizontal({ x1: -0.5, x2: 0.5, y: y + 9, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
   linhaHorizontal({ x1: -0.5, x2: 0.5, y: y + 24, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
@@ -75,7 +76,7 @@ export function getMenuItens({
     margemTopo
   });
   titulo({
-    value: 'O/CST',
+    value: isCSOSN ? 'O/CSOSN' : 'O/CST',
     x: 270,
     y: y + 10.2,
     largura: 20,

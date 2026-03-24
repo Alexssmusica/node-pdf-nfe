@@ -2,7 +2,7 @@ import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
 import { criaLayout } from './cria-layout';
 import { DEFAULT_NFE } from './default';
-import { linhaHorizontalTracejada } from './linha-horizontal-tracejada';
+import { linhaHorizontal } from './linha-horizontal';
 import { normal } from './normal';
 import { optionsDocNFe } from './options-doc';
 
@@ -283,7 +283,7 @@ export async function gerarItens({
       maiorY = doc.y;
     } else {
       if (DEFAULT_NFE.separadorDeItens !== undefined) {
-        linhaHorizontalTracejada({ x1: 0, x2: 0, y: maiorY, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+        linhaHorizontal({ x1: 0, x2: 0, y: maiorY, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
       }
     }
   }

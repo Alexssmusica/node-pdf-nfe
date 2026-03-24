@@ -283,6 +283,7 @@ export declare namespace GeneratePdf {
     margemDireita: number;
     finalEspacoDet: number;
     larguraDoFormulario: number;
+    isCSOSN: boolean;
   };
   type InputDadosAdicionais = {
     doc: PDFKit.PDFDocument;
