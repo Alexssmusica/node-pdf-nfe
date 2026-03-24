@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.15...v1.2.16) (2026-03-24)
+
+
+### Bug Fixes
+
+* linhas quando faturamento ([34de5f3](https://github.com/Alexssmusica/node-pdf-nfe/commit/34de5f30151dd10b102b5e8e6dce7afe9b7352ba))
+
 ## [1.2.15](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.14...v1.2.15) (2026-03-24)
 
 
