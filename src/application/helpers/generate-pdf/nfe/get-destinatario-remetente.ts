@@ -83,8 +83,12 @@ export function getDestinatarioRemetente({
   });
 
   titulo({ value: 'ENDEREÇO', x: 1.5, y: y + 30, largura: 272, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  const complemento = dest.enderDest?.xCpl ? ` ${dest.enderDest.xCpl}` : '';
   campo({
-    value: dest.enderDest?.xLgr && dest.enderDest?.nro ? `${dest.enderDest.xLgr}, ${dest.enderDest.nro}` : (dest.enderDest?.xLgr ?? ''),
+    value:
+      dest.enderDest?.xLgr && dest.enderDest?.nro
+        ? `${dest.enderDest.xLgr}, ${dest.enderDest.nro}${complemento}`
+        : (dest.enderDest?.xLgr ?? ''),
     x: 1.5,
     y: y + 38,
     largura: 272,
