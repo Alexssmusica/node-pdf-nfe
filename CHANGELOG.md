@@ -1,3 +1,10 @@
+## [1.2.15](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.14...v1.2.15) (2026-03-24)
+
+
+### Bug Fixes
+
+* linha ([a7508eb](https://github.com/Alexssmusica/node-pdf-nfe/commit/a7508eb0b4eafec87aeb51bfd8f1a401dec39a2c))
+
 ## [1.2.14](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.13...v1.2.14) (2026-03-24)
 
 
