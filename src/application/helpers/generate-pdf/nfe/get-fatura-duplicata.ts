@@ -58,6 +58,7 @@ export function getFaturaDuplicata({
     }
 
     if (cobr.dup !== undefined) {
+      doc.save();
       cobr.dup.forEach((dup) => {
         const boxRealX = margemEsquerda + ajusteX + currentX;
         const boxRealY = margemTopo + ajusteY + currentY;
@@ -100,6 +101,7 @@ export function getFaturaDuplicata({
           currentY = maxBottom + BOX_GAP;
         }
       });
+      doc.restore();
     }
 
     const finalY = maxBottom + BOX_PADDING + 6;
