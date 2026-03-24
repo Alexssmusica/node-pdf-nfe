@@ -1,3 +1,10 @@
+## [1.2.17](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.16...v1.2.17) (2026-03-24)
+
+
+### Bug Fixes
+
+* add complemento dest ([aaca42d](https://github.com/Alexssmusica/node-pdf-nfe/commit/aaca42dbcae67f48bbd6452d948786204367815a))
+
 ## [1.2.16](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.15...v1.2.16) (2026-03-24)
 
 
