@@ -21,8 +21,6 @@ export function linhaHorizontal({
     doc.lineWidth(0.2).moveTo(x1, y).lineTo(x2, y).dash(5, { space: 2 }).stroke();
     doc.restore();
   } else {
-    doc.save();
     doc.moveTo(x1, y).lineTo(x2, y).stroke();
-    doc.restore();
   }
 }
