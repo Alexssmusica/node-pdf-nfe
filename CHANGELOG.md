@@ -1,3 +1,10 @@
+## [1.2.19](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.18...v1.2.19) (2026-04-09)
+
+
+### Bug Fixes
+
+* novo formato cnpj ([1682d58](https://github.com/Alexssmusica/node-pdf-nfe/commit/1682d58705eeb92685d0ffebe0f01f8ff0f1a430))
+
 ## [1.2.18](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.17...v1.2.18) (2026-03-27)
 
 
