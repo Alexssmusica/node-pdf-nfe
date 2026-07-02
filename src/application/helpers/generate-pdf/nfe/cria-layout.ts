@@ -23,27 +23,30 @@ export async function criaLayout({
   larguraDoFormulario,
   margemDireita,
   folha,
-  cancelada
-}: GeneratePdf.InputCriaLayout): Promise<void> {
+  cancelada,
+  overflowTextAdicionais
+}: GeneratePdf.InputCriaLayout): Promise<string> {
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
   const finalEspacoDet = folha === 0 ? DEFAULT_NFE.finalTamanhoDet1 : DEFAULT_NFE.finalTamanhoDetDemais;
   const isCSOSN = emit.CRT === '4' || emit.CRT === '1';
 
-  if (ide.tpAmb === '2') {
-    getHomologacao({
-      ajusteX,
-      ajusteY,
-      doc,
-      margemEsquerda,
-      margemTopo,
-      larguraDoFormulario,
-      protNFe: nf.protNFe,
-      cancelada,
-      folha
-    });
-  } else if (ide.tpAmb === '1' && cancelada) {
-    getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, folha });
+  if (folha === 0) {
+    if (ide.tpAmb === '2') {
+      getHomologacao({
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo,
+        larguraDoFormulario,
+        protNFe: nf.protNFe,
+        cancelada,
+        folha
+      });
+    } else if (ide.tpAmb === '1' && cancelada) {
+      getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, folha });
+    }
   }
 
   if (folha === 0) {
@@ -91,6 +94,22 @@ export async function criaLayout({
     y: doc.y,
     ide
   });
+
+  if (overflowTextAdicionais) {
+    getDadosAdicionais({
+      ajusteX,
+      ajusteY,
+      doc,
+      infAdic: { infCpl: overflowTextAdicionais, obsCont: [], obsFisco: [], procRef: [] },
+      larguraDoFormulario,
+      margemDireita,
+      margemEsquerda,
+      margemTopo,
+      finalEspacoDet: y - margemTopo - ajusteY,
+      earlyClose: true
+    });
+    return '';
+  }
 
   if (folha === 0) {
     y = getFaturaDuplicata({
@@ -142,7 +161,7 @@ export async function criaLayout({
       y
     });
 
-    getDadosAdicionais({
+    const overflowText = getDadosAdicionais({
       ajusteX,
       ajusteY,
       doc,
@@ -153,6 +172,21 @@ export async function criaLayout({
       margemTopo,
       finalEspacoDet
     });
+
+    y = getMenuItens({
+      ajusteX,
+      ajusteY,
+      doc,
+      margemEsquerda,
+      margemTopo,
+      y,
+      margemDireita,
+      finalEspacoDet,
+      larguraDoFormulario,
+      isCSOSN
+    });
+
+    return overflowText;
   }
 
   y = getMenuItens({
@@ -167,4 +201,6 @@ export async function criaLayout({
     larguraDoFormulario,
     isCSOSN
   });
+
+  return '';
 }
