@@ -27,7 +27,7 @@
   "homepage": "https://danfenfeonline.com.br/gerar-danfe",
   "scripts": {
     "build-release": "npm run prettier && npm run build && node release.js && npm run publish:npm",
-    "clean-lib": "npx rimraf lib",
+    "clean-lib": "npx rimraf lib && npx rimraf tsconfig.tsbuildinfo",
     "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
     "prettier": "prettier src/**/*.{js,ts} --write",
     "publish:npm": "node publish.js",
