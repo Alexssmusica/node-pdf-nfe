@@ -1,3 +1,12 @@
+## [1.2.20](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.19...v1.2.20) (2026-07-03)
+
+
+### Bug Fixes
+
+* Ajustada linha que ficava na horizontal e na vertical no final da página quando havia 2 paginas de itens com 2 páginas de informação complementar. ([d41f987](https://github.com/Alexssmusica/node-pdf-nfe/commit/d41f987106c839c44cce78885d28ee3e470e0213))
+* **danfe:** corrige overflow de dados adicionais e marca d'água em multiplas paginas ([29fcb19](https://github.com/Alexssmusica/node-pdf-nfe/commit/29fcb190aaf23ae9467104c9f697121cf3e36ce7))
+* padronização das fontes ([3514fa6](https://github.com/Alexssmusica/node-pdf-nfe/commit/3514fa6b978d57eb7d98b1e6a9dd2aed9929d2ed))
+
 ## [1.2.19](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.18...v1.2.19) (2026-04-09)
 
 
