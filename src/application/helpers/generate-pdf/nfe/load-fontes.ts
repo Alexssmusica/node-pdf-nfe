@@ -1,11 +1,11 @@
 import path from 'path';
 
 export function loadFonts(doc: PDFKit.PDFDocument): void {
-  const diretorioDeFontes = path.join(__dirname, './../fontes');
-  const timesNewRoman = path.join(diretorioDeFontes, 'Times New Roman.ttf');
-  const timesNewRomanNegrito = path.join(diretorioDeFontes, 'Times New Roman Bold.ttf');
-  const timesNewRomanItalico = path.join(diretorioDeFontes, 'Times New Roman Italic.ttf');
-  const timesNewRomanNegritoItalico = path.join(diretorioDeFontes, 'Times New Roman Bold Italic.ttf');
+  const diretorioDeFontes = path.join(__dirname, './../fontes/times-new-roman');
+  const timesNewRoman = path.join(diretorioDeFontes, 'times-new-roman.ttf');
+  const timesNewRomanNegrito = path.join(diretorioDeFontes, 'times-new-roman-bold.ttf');
+  const timesNewRomanItalico = path.join(diretorioDeFontes, 'times-new-roman-italic.ttf');
+  const timesNewRomanNegritoItalico = path.join(diretorioDeFontes, 'times-new-roman-bold-italic.ttf');
 
   doc.registerFont('normal', timesNewRoman);
   doc.registerFont('negrito', timesNewRomanNegrito);
@@ -15,10 +15,10 @@ export function loadFonts(doc: PDFKit.PDFDocument): void {
 
 export function loadFontsNFCe(doc: PDFKit.PDFDocument): void {
   const diretorioDeFontes = path.join(__dirname, './../fontes/roboto-condensed');
-  const normal = path.join(diretorioDeFontes, 'RobotoCondensed-Regular.ttf');
-  const negrito = path.join(diretorioDeFontes, 'RobotoCondensed-Bold.ttf');
-  const italico = path.join(diretorioDeFontes, 'RobotoCondensed-Italic.ttf');
-  const negritoItalico = path.join(diretorioDeFontes, 'RobotoCondensed-BoldItalic.ttf');
+  const normal = path.join(diretorioDeFontes, 'roboto-condensed-regular.ttf');
+  const negrito = path.join(diretorioDeFontes, 'roboto-condensed-bold.ttf');
+  const italico = path.join(diretorioDeFontes, 'roboto-condensed-italic.ttf');
+  const negritoItalico = path.join(diretorioDeFontes, 'roboto-condensed-bold-italic.ttf');
 
   doc.registerFont('normal', normal);
   doc.registerFont('negrito', negrito);

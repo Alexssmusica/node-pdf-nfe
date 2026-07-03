@@ -10,6 +10,7 @@
           "ES2024"
       ],
       "sourceMap": false,
+      "rootDir": "./src",
       "outDir": "./lib",
       "moduleResolution": "NodeNext",
       "useDefineForClassFields": false,
@@ -28,7 +29,6 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "skipLibCheck": true,
-      "baseUrl": ".",
       "resolveJsonModule": true,
       "allowJs": true,
   },
