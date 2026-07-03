@@ -185,5 +185,6 @@ export function getTransporte({
     margemEsquerda,
     margemTopo
   });
+  doc.y = margemTopo + ajusteY + y + 68;
   return doc.y;
 }

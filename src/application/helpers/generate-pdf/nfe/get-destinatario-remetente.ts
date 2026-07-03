@@ -186,5 +186,6 @@ export function getDestinatarioRemetente({
     margemTopo
   });
 
+  doc.y = margemTopo + ajusteY + y + 69;
   return doc.y;
 }

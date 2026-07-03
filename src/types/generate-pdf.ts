@@ -89,6 +89,7 @@ export declare namespace GeneratePdf {
     folha: number;
     pathLogo?: string;
     cancelada?: boolean;
+    overflowTextAdicionais?: string;
   };
   type InputTitulo = {
     x: number;
@@ -295,5 +296,7 @@ export declare namespace GeneratePdf {
     larguraDoFormulario: number;
     infAdic: TNFeInfNFeInfAdic;
     finalEspacoDet: number;
+    earlyClose?: boolean;
+    fecharAposConteudo?: boolean;
   };
 }
