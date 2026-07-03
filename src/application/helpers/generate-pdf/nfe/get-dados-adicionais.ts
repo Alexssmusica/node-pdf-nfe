@@ -33,7 +33,7 @@ export function getDadosAdicionais({
 
   if (!earlyClose) {
     doc
-      .rect(margemEsquerda + ajusteX, margemTopo + ajusteY + finalEspacoDet, larguraDoFormulario, maxBottom - finalEspacoDet)
+      .rect(margemEsquerda + ajusteX - 1, margemTopo + ajusteY + finalEspacoDet, larguraDoFormulario + 2, maxBottom + 1.5 - finalEspacoDet)
       .fillColor('white')
       .fill();
   }

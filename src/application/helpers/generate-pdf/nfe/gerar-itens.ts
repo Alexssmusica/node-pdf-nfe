@@ -57,6 +57,14 @@ export async function gerarItens({
     }
   }
 
+  function fecharAreaItens(yRel: number): void {
+    doc
+      .rect(margemEsquerda + ajusteX - 1, margemTopo + ajusteY + yRel, larguraDoFormulario + 2, 823 - yRel)
+      .fillColor('white')
+      .fill();
+    linhaHorizontal({ x1: 0, x2: 0, y: yRel, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  }
+
   let maiorY = doc.y;
   for (let i = 0; i < nf.NFe.infNFe.det.length; i++) {
     const item = nf.NFe.infNFe.det[i];
@@ -366,6 +374,8 @@ export async function gerarItens({
         overflowTextAdicionais
       });
     }
+  } else if (folha > 0 && maiorY < 821.8) {
+    fecharAreaItens(maiorY - margemTopo - ajusteY);
   }
 
   if (folha > 0) desenharMarcas(folha);
