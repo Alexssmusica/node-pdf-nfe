@@ -1,3 +1,10 @@
+## [1.2.22](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.21...v1.2.22) (2026-08-27)
+
+
+### Bug Fixes
+
+* tamanho fonte ([90862ba](https://github.com/Alexssmusica/node-pdf-nfe/commit/90862bacecd292371d1c2c713ab39ebbe5335e34))
+
 ## [1.2.21](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.20...v1.2.21) (2026-07-03)
 
 
