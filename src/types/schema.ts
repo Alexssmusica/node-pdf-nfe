@@ -638,10 +638,10 @@ interface TNFeInfNFeTranspTransporta {
   item: string;
   itemElementName: TNFeDoc;
   xNome: string;
-  ie: string;
+  IE: string;
   xEnder: string;
   xMun: string;
-  uf: TUfEmi;
+  UF: TUfEmi;
   ufSpecified: boolean;
 }
 export interface TNFeInfNFePag {

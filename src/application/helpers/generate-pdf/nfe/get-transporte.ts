@@ -140,10 +140,10 @@ export function getTransporte({
   titulo({ value: 'MUNICÍPIO', x: 259.5, y: y + 30, largura: 172, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: transp.transporta?.xMun ?? '', x: 259.5, y: y + 38.5, largura: 172, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'UF', x: 435.5, y: y + 30, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: transp.transporta?.uf ?? '', x: 435.5, y: y + 38.5, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  campo({ value: transp.transporta?.UF ?? '', x: 435.5, y: y + 38.5, largura: 19.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 458, y: y + 30, largura: 126.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({
-    value: formatStateRegistration(transp.transporta?.ie ?? ''),
+    value: formatStateRegistration(transp.transporta?.IE ?? ''),
     x: 458,
     y: y + 38.5,
     largura: 126.5,
