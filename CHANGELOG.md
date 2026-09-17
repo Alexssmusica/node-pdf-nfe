@@ -1,3 +1,10 @@
+## [1.2.23](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.22...v1.2.23) (2026-09-17)
+
+
+### Bug Fixes
+
+* UF e IE estava minusculo sendo padrão maiusculo e não estava pegando na DANFE ([32318c9](https://github.com/Alexssmusica/node-pdf-nfe/commit/32318c980b823f9387ba8e5ec06a9496f91478cf))
+
 ## [1.2.22](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.21...v1.2.22) (2026-08-27)
 
 
