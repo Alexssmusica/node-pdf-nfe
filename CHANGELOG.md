@@ -1,3 +1,10 @@
+## [1.2.24](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.23...v1.2.24) (2026-09-18)
+
+
+### Bug Fixes
+
+* ie aceitando 'ISENTO' ([f08630e](https://github.com/Alexssmusica/node-pdf-nfe/commit/f08630e0b12440797fa25480dbbaa07a4681fa2a))
+
 ## [1.2.23](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.22...v1.2.23) (2026-09-17)
 
 
