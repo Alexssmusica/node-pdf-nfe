@@ -6,6 +6,7 @@
  */
 export function formatStateRegistration(stateRegistration: string): string {
   if (!stateRegistration) return '';
+  if (stateRegistration === 'ISENTO') return stateRegistration;
   const cleanInscricao = stateRegistration.replace(/\D/g, '');
   const formats: { [key: number]: string } = {
     8: '$1.$2-$3',
