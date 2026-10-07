@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.24...v1.3.0) (2026-10-07)
+
+
+### Features
+
+* **danfe:** adequa a DANFE da NF-e ao leiaute da NT 2026.010 ([bbd2552](https://github.com/Alexssmusica/node-pdf-nfe/commit/bbd255206dd60bb7753580bbd10f84bb70673dd5))
+
 ## [1.2.24](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.23...v1.2.24) (2026-09-18)
 
 
