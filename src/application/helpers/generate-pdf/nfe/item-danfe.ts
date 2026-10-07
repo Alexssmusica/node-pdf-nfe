@@ -196,7 +196,7 @@ export function medirItem(doc: PDFKit.PDFDocument, item: TNFeInfNFeDet, larguraF
   const { colunas } = colunasItem(larguraFormulario);
   const linha = alturaLinha(doc);
   const alturaDescricao = doc.heightOfString(textoDescricao(item), { width: colunas.descricao.largura, lineGap: LINE_GAP });
-  return Math.max(alturaDescricao, linha * 4);
+  return Math.max(alturaDescricao, linha * 4) - LINE_GAP;
 }
 
 export function desenharItem(ctx: CtxItem, item: TNFeInfNFeDet, y: number): number {

@@ -8,6 +8,8 @@ import { desenharItem, medirItem } from './item-danfe';
 import { linhaHorizontal } from './linha-horizontal';
 import { optionsDocNFe } from './options-doc';
 
+const ESPACO_ITEM = 2;
+
 export async function gerarItens({
   nf,
   ajusteX,
@@ -116,16 +118,15 @@ export async function gerarItens({
   for (let i = 0; i < nf.NFe.infNFe.det.length; i++) {
     const item = nf.NFe.infNFe.det[i];
     const altura = medirItem(doc, item, larguraDoFormulario);
-    const ocupacao = 3 + altura + (DEFAULT_NFE.separadorDeItens ? 3 : 0);
+    const ocupacao = ESPACO_ITEM + altura + ESPACO_ITEM;
     if (itensNaFolha > 0 && maiorY + ocupacao > limiteGrade()) {
       await quebrarPagina();
       itensNaFolha = 0;
     }
 
-    maiorY = desenharItem(ctx, item, maiorY + 3);
+    maiorY = desenharItem(ctx, item, maiorY + ESPACO_ITEM) + ESPACO_ITEM;
     if (DEFAULT_NFE.separadorDeItens) {
       linhaHorizontal({ x1: 0, x2: 0, y: maiorY, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-      maiorY += 3;
     }
     itensNaFolha++;
   }
