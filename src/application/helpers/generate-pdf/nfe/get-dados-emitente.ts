@@ -47,8 +47,12 @@ export async function getDadosEmitente({
   linhaVertical({ y1: y + 15.25, y2: y + 105.7, x: 240.75, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
   linhaVertical({ y1: y + 15.25, y2: y + 125.7, x: 340.05, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
   linhaVertical({ y1: y + 15.25, y2: y + 145.7, x: larguraDoFormulario, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 125.7, y2: y + 145.7, x: 195.55, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 125.7, y2: y + 145.7, x: 391, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+  const faixasEmitente = faixasIdentificacaoEmitente(larguraDoFormulario, emit);
+  faixasEmitente.forEach((faixa, indice) => {
+    if (indice > 0) {
+      linhaVertical({ y1: y + 125.7, y2: y + 145.7, x: faixa.x, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+    }
+  });
   titulo({
     value: 'DANFE',
     x: 266.5,
@@ -309,50 +313,70 @@ export async function getDadosEmitente({
   });
   titulo({ value: 'NATUREZA DA OPERAÇÃO', x: 1.5, y: y + 106.7, largura: 338, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
   campo({ value: ide.natOp, x: 1.5, y: y + 114.1, largura: 338, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  titulo({ value: 'INSCRIÇÃO ESTADUAL', x: 1.5, y: y + 126.7, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({
-    value: formatStateRegistration(emit.IE),
-    x: 1.5,
-    y: y + 134.1,
-    largura: 192.5,
-    ajusteX,
-    ajusteY,
-    doc,
-    margemEsquerda,
-    margemTopo
+  faixasEmitente.forEach((faixa) => {
+    titulo({
+      value: faixa.titulo,
+      x: faixa.x + 1.5,
+      y: y + 126.7,
+      largura: faixa.largura - 3,
+      tamanho: faixa.titulo.length > 32 ? 5 : 6,
+      ajusteX,
+      ajusteY,
+      doc,
+      margemEsquerda,
+      margemTopo
+    });
+    if (faixa.valor) {
+      campo({
+        value: faixa.valor,
+        x: faixa.x + 1.5,
+        y: y + 134.1,
+        largura: faixa.largura - 3,
+        ajusteX,
+        ajusteY,
+        doc,
+        margemEsquerda,
+        margemTopo
+      });
+    }
   });
-  titulo({
-    value: 'INSCRIÇÃO ESTADUAL DO SUBST. TRIBUT.',
-    x: 197,
-    y: y + 126.7,
-    largura: 192.5,
-    ajusteX,
-    ajusteY,
-    doc,
-    margemEsquerda,
-    margemTopo
-  });
-  campo({
-    value: formatStateRegistration(emit.IEST ?? '') ?? '',
-    x: 197,
-    y: y + 134.1,
-    largura: 192.5,
-    ajusteX,
-    ajusteY,
-    doc,
-    margemEsquerda,
-    margemTopo
-  });
-  titulo({ value: 'CNPJ', x: 392.5, y: y + 126.7, largura: 192.5, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({
-    value: formatCnpj(emit.CNPJ ?? ''),
-    x: 392.5,
-    y: y + 134.1,
-    largura: 192.5,
-    ajusteX,
-    ajusteY,
-    doc,
-    margemEsquerda,
-    margemTopo
+
+  doc.y = margemTopo + ajusteY + y + 145.7;
+}
+
+function descricaoCrt(crt: string): string {
+  switch (crt) {
+    case '1':
+      return '1 - SIMPLES NACIONAL';
+    case '2':
+      return '2 - SIMPLES NACIONAL - EXCESSO';
+    case '3':
+      return '3 - REGIME NORMAL';
+    case '4':
+      return '4 - MEI';
+    default:
+      return crt;
+  }
+}
+
+function faixasIdentificacaoEmitente(
+  larguraDoFormulario: number,
+  emit: GeneratePdf.InputDadosEmitente['emit']
+): Array<{ x: number; largura: number; titulo: string; valor: string }> {
+  const pesos = [1.05, 1.25, 1.05, 1.35, 1.65];
+  const soma = pesos.reduce((total, peso) => total + peso, 0);
+  const faixas = [
+    { titulo: 'INSCRIÇÃO ESTADUAL', valor: formatStateRegistration(emit.IE) },
+    { titulo: 'INSC. ESTADUAL DO SUBST. TRIBUT.', valor: formatStateRegistration(emit.IEST ?? '') ?? '' },
+    { titulo: 'CNPJ / CPF', valor: formatCnpj(emit.CNPJ ?? '') },
+    { titulo: 'CÓDIGO DO REGIME TRIBUTÁRIO', valor: descricaoCrt(emit.CRT) },
+    { titulo: 'TIPO DE REGIME DE APURAÇÃO DO IBS E DA CBS', valor: '' }
+  ];
+  let cursor = 0;
+  return faixas.map((faixa, indice) => {
+    const largura = indice === faixas.length - 1 ? larguraDoFormulario - cursor : (pesos[indice] / soma) * larguraDoFormulario;
+    const atual = { ...faixa, x: cursor, largura };
+    cursor += largura;
+    return atual;
   });
 }

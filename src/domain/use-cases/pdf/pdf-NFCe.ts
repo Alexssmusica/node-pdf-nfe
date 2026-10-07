@@ -405,7 +405,7 @@ export async function pdfNFCe(nf: NFeProc, opcoes?: OpcoesPDF): Promise<PDFKit.P
   pag.detPag.forEach((element) => {
     normal({
       doc,
-      value: getPagName(element.tPag),
+      value: getPagName(element.tPag, element.xPag),
       x: margemPadrao,
       y: doc.y,
       largura: larguraPagina,
@@ -635,54 +635,36 @@ function ajusteTamanhoTexto(doc: PDFKit.PDFDocument, value: string, tamanho: num
   return value;
 }
 
-function getPagName(value: string) {
-  if (value === '01') {
-    return 'Dinheiro';
+const TPAG_LABELS: Record<string, string> = {
+  '01': 'Dinheiro',
+  '02': 'Cheque',
+  '03': 'Cartão de Crédito',
+  '04': 'Cartão de Débito',
+  '05': 'Cartão de Loja (Private Label), Crediário Digital, Outros Crediários',
+  '10': 'Vale Alimentação',
+  '11': 'Vale Refeição',
+  '12': 'Vale Presente',
+  '13': 'Vale Combustível',
+  '14': 'Duplicata Mercantil',
+  '15': 'Boleto Bancário',
+  '16': 'Depósito Bancário',
+  '17': 'Pagamento Instantâneo (PIX) – Dinâmico',
+  '18': 'TED (Transferência Eletrônica Disponível)',
+  '19': 'Programa de fidelidade, CashBack, Crédito Virtual',
+  '20': 'Pagamento Instantâneo (PIX) – Estático',
+  '21': 'Crédito em Loja',
+  '22': 'Pagamento Eletrônico não Informado',
+  '23': 'Pagamento Instantâneo (PIX) – Automático',
+  '24': 'TEF – Book Transfer',
+  '90': 'Sem pagamento',
+  '91': 'Pagamento Posterior',
+  '99': 'Outros'
+};
+
+function getPagName(tPag: string | number, xPag?: string): string {
+  const code = String(tPag).padStart(2, '0');
+  if (code === '99' && xPag) {
+    return xPag;
   }
-  if (value === '02') {
-    return 'Cheque';
-  }
-  if (value === '03') {
-    return 'Cartão de Crédito';
-  }
-  if (value === '04') {
-    return 'Cartão de Débito';
-  }
-  if (value === '05') {
-    return 'Crédito Loja';
-  }
-  if (value === '10') {
-    return 'Vale Alimentação';
-  }
-  if (value === '11') {
-    return 'Vale Refeição';
-  }
-  if (value === '12') {
-    return 'Vale Presente';
-  }
-  if (value === '13') {
-    return 'Vale Combustível';
-  }
-  if (value === '14') {
-    return 'Duplicata Mercantil';
-  }
-  if (value === '15') {
-    return 'Boleto Bancário';
-  }
-  if (value === '16') {
-    return 'Depósito Bancário';
-  }
-  if (value === '17') {
-    return 'Pagamento Instantâneo (PIX)';
-  }
-  if (value === '18') {
-    return 'Transferência bancária, Carteira Digital';
-  }
-  if (value === '19') {
-    return 'Programa de fidelidade, CashBack, Crédito Virtual';
-  }
-  if (value === '90') {
-    return 'Sem pagamento';
-  }
-  return 'Outros';
+  return TPAG_LABELS[code] ?? xPag ?? 'Outros';
 }

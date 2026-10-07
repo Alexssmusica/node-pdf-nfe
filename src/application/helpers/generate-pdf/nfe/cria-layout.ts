@@ -5,11 +5,13 @@ import { getDadosEmitente } from './get-dados-emitente';
 import { getDestinatarioRemetente } from './get-destinatario-remetente';
 import { getFaturaDuplicata } from './get-fatura-duplicata';
 import { getHomologacao } from './get-homologacao';
-import { getImposto } from './get-imposto';
 import { getIss } from './get-iss';
 import { getMenuItens } from './get-menu-itens';
 import { getNotaCancelada } from './get-nota-cancelada';
 import { getRecibo } from './get-recibo';
+import { getTotalIbsCbsIs } from './get-total-ibs-cbs-is';
+import { getTotalIcmsIpi } from './get-total-icms-ipi';
+import { getTotalProdutos } from './get-total-produtos';
 import { getTransporte } from './get-transporte';
 
 export async function criaLayout({
@@ -29,7 +31,7 @@ export async function criaLayout({
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
   const finalEspacoDet = folha === 0 ? DEFAULT_NFE.finalTamanhoDet1 : DEFAULT_NFE.finalTamanhoDetDemais;
-  const isCSOSN = emit.CRT === '4' || emit.CRT === '1';
+  const qrCode = nf.NFe.infNFeSupl?.qrCode;
 
   if (folha === 0) {
     if (ide.tpAmb === '2') {
@@ -96,7 +98,7 @@ export async function criaLayout({
   });
 
   if (overflowTextAdicionais) {
-    getDadosAdicionais({
+    return await getDadosAdicionais({
       ajusteX,
       ajusteY,
       doc,
@@ -106,9 +108,9 @@ export async function criaLayout({
       margemEsquerda,
       margemTopo,
       finalEspacoDet: y - margemTopo - ajusteY,
-      earlyClose: true
+      earlyClose: true,
+      qrCode
     });
-    return '';
   }
 
   if (folha === 0) {
@@ -124,10 +126,47 @@ export async function criaLayout({
       y
     });
 
-    y = getImposto({
+    y = getTotalProdutos({
       ajusteX,
       ajusteY,
       doc,
+      larguraDoFormulario,
+      margemDireita,
+      margemEsquerda,
+      margemTopo,
+      total,
+      y
+    });
+
+    y = getTotalIcmsIpi({
+      ajusteX,
+      ajusteY,
+      doc,
+      larguraDoFormulario,
+      margemDireita,
+      margemEsquerda,
+      margemTopo,
+      total,
+      y
+    });
+
+    y = getTotalIbsCbsIs({
+      ajusteX,
+      ajusteY,
+      doc,
+      larguraDoFormulario,
+      margemDireita,
+      margemEsquerda,
+      margemTopo,
+      total,
+      y
+    });
+
+    y = getIss({
+      ajusteX,
+      ajusteY,
+      doc,
+      emit,
       larguraDoFormulario,
       margemDireita,
       margemEsquerda,
@@ -148,20 +187,7 @@ export async function criaLayout({
       y
     });
 
-    y = getIss({
-      ajusteX,
-      ajusteY,
-      doc,
-      emit,
-      larguraDoFormulario,
-      margemDireita,
-      margemEsquerda,
-      margemTopo,
-      total,
-      y
-    });
-
-    const overflowText = getDadosAdicionais({
+    const overflowText = await getDadosAdicionais({
       ajusteX,
       ajusteY,
       doc,
@@ -170,10 +196,11 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
-      finalEspacoDet
+      finalEspacoDet,
+      qrCode
     });
 
-    y = getMenuItens({
+    getMenuItens({
       ajusteX,
       ajusteY,
       doc,
@@ -182,14 +209,13 @@ export async function criaLayout({
       y,
       margemDireita,
       finalEspacoDet,
-      larguraDoFormulario,
-      isCSOSN
+      larguraDoFormulario
     });
 
     return overflowText;
   }
 
-  y = getMenuItens({
+  getMenuItens({
     ajusteX,
     ajusteY,
     doc,
@@ -198,8 +224,7 @@ export async function criaLayout({
     y,
     margemDireita,
     finalEspacoDet,
-    larguraDoFormulario,
-    isCSOSN
+    larguraDoFormulario
   });
 
   return '';

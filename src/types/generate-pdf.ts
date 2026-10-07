@@ -40,6 +40,8 @@ export type DefaultNfe = {
   corDoLayout: string;
   finalTamanhoDet1: number;
   finalTamanhoDetDemais: number;
+  fundoDaPagina: number;
+  reservaDadosAdicionais: number;
 };
 
 export declare namespace GeneratePdf {
@@ -284,7 +286,6 @@ export declare namespace GeneratePdf {
     margemDireita: number;
     finalEspacoDet: number;
     larguraDoFormulario: number;
-    isCSOSN: boolean;
   };
   type InputDadosAdicionais = {
     doc: PDFKit.PDFDocument;
@@ -298,5 +299,6 @@ export declare namespace GeneratePdf {
     finalEspacoDet: number;
     earlyClose?: boolean;
     fecharAposConteudo?: boolean;
+    qrCode?: string;
   };
 }

@@ -12,7 +12,7 @@ export const DEFAULT_NFE: DefaultNfe = {
   tamanhoDaFonteDoCampo: 9.5,
   alinhamentoDoCampo: 'center',
   corDoCampo: 'black',
-  tamanhoDaFonteDosItens: 7,
+  tamanhoDaFonteDosItens: 5.5,
   separadorDeItens: true,
   ajusteYDoLogotipo: 0,
   ajusteYDaIdentificacaoDoEmitente: 0,
@@ -20,6 +20,8 @@ export const DEFAULT_NFE: DefaultNfe = {
   ajusteYDaHomologacao: 275,
   tamanhoDoCodigoDeBarras: 32,
   corDoLayout: 'black',
-  finalTamanhoDet1: 752,
-  finalTamanhoDetDemais: 822
+  finalTamanhoDet1: 746,
+  finalTamanhoDetDemais: 822,
+  fundoDaPagina: 821.8,
+  reservaDadosAdicionais: 70
 };

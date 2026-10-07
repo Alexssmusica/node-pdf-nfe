@@ -128,6 +128,48 @@ interface TNFeInfNFeDetImpostoPISItem {
   qBCProd?: number;
   vAliqProd?: number;
 }
+interface TNFeInfNFeDetImpostoGRed {
+  pRedAliq?: string;
+  pAliqEfet?: string;
+}
+interface TNFeInfNFeDetImpostoGIBSUF {
+  pIBSUF?: string;
+  gRed?: TNFeInfNFeDetImpostoGRed;
+  vIBSUF?: string;
+}
+interface TNFeInfNFeDetImpostoGIBSMun {
+  pIBSMun?: string;
+  gRed?: TNFeInfNFeDetImpostoGRed;
+  vIBSMun?: string;
+}
+interface TNFeInfNFeDetImpostoGCBS {
+  pCBS?: string;
+  gRed?: TNFeInfNFeDetImpostoGRed;
+  vCBS?: string;
+}
+interface TNFeInfNFeDetImpostoGIBSCBS {
+  vBC?: string;
+  gIBSUF?: TNFeInfNFeDetImpostoGIBSUF;
+  GIBSUF?: TNFeInfNFeDetImpostoGIBSUF;
+  gIBSMun?: TNFeInfNFeDetImpostoGIBSMun;
+  GIBSMun?: TNFeInfNFeDetImpostoGIBSMun;
+  vIBS?: string;
+  gCBS?: TNFeInfNFeDetImpostoGCBS;
+  GCBS?: TNFeInfNFeDetImpostoGCBS;
+}
+interface TNFeInfNFeDetImpostoIBSCBS {
+  CST?: string;
+  cClassTrib?: string;
+  gIBSCBS?: TNFeInfNFeDetImpostoGIBSCBS;
+  GIBSCBS?: TNFeInfNFeDetImpostoGIBSCBS;
+}
+interface TNFeInfNFeDetImpostoIS {
+  CSTIS?: string;
+  cClassTribIS?: string;
+  vBCIS?: string;
+  pIS?: string;
+  vIS?: string;
+}
 interface TNFeInfNFeDetImposto {
   vTotTrib: number;
   ICMS: TNFeInfNFeDetImpostoICMS;
@@ -139,6 +181,8 @@ interface TNFeInfNFeDetImposto {
   PISST?: TNFeInfNFeDetImpostoPISST;
   COFINSST?: TNFeInfNFeDetImpostoCOFINSST;
   ICMSUFDest?: TNFeInfNFeDetImpostoICMSUFDest;
+  IBSCBS?: TNFeInfNFeDetImpostoIBSCBS;
+  IS?: TNFeInfNFeDetImpostoIS;
 }
 interface TNFeInfNFeDetImpostoICMSUFDest {
   vBCUFDest: number;
@@ -651,7 +695,30 @@ export interface TNFeInfNFePag {
 export interface TNFeInfNFePagDetPag {
   indPag: '0' | '1';
   indPagSpecified?: boolean;
-  tPag: '01' | '02' | '03' | '04' | '05' | '10' | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '90' | '99';
+  tPag:
+    | '01'
+    | '02'
+    | '03'
+    | '04'
+    | '05'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
+    | '16'
+    | '17'
+    | '18'
+    | '19'
+    | '20'
+    | '21'
+    | '22'
+    | '23'
+    | '24'
+    | '90'
+    | '91'
+    | '99';
   vPag: string;
   card?: TNFeInfNFePagDetPagCard;
   xPag?: string;
@@ -702,6 +769,51 @@ export interface TNFeInfNFeTotalICMSTot {
   vOutro: string;
   vNF: string;
   vTotTrib?: string;
+  qBCMono?: string;
+  vICMSMono?: string;
+  qBCMonoReten?: string;
+  vICMSMonoReten?: string;
+}
+interface TNFeInfNFeTotalISTot {
+  vIS?: string;
+}
+interface TNFeInfNFeTotalGMono {
+  vIBSMono?: string;
+  vCBSMono?: string;
+  vIBSMonoReten?: string;
+  vCBSMonoReten?: string;
+  vIBSMonoRet?: string;
+  vCBSMonoRet?: string;
+}
+interface TNFeInfNFeTotalGIBSUF {
+  vDif?: string;
+  vDevTrib?: string;
+  vIBSUF?: string;
+}
+interface TNFeInfNFeTotalGIBSMun {
+  vDif?: string;
+  vDevTrib?: string;
+  vIBSMun?: string;
+}
+interface TNFeInfNFeTotalGIBS {
+  gIBSUF?: TNFeInfNFeTotalGIBSUF;
+  gIBSMun?: TNFeInfNFeTotalGIBSMun;
+  vIBS?: string;
+  vCredPres?: string;
+  vCredPresCondSus?: string;
+}
+interface TNFeInfNFeTotalGCBS {
+  vDif?: string;
+  vDevTrib?: string;
+  vCBS?: string;
+  vCredPres?: string;
+  vCredPresCondSus?: string;
+}
+interface TNFeInfNFeTotalIBSCBSTot {
+  vBCIBSCBS?: string;
+  gIBS?: TNFeInfNFeTotalGIBS;
+  gCBS?: TNFeInfNFeTotalGCBS;
+  gMono?: TNFeInfNFeTotalGMono;
 }
 export interface IdeInput {
   cUF: TCodUfIbge;
@@ -786,6 +898,9 @@ export interface TNFeInfNFeTotal {
   ICMSTot: TNFeInfNFeTotalICMSTot;
   ISSQNtot?: TNFeInfNFeTotalISSQNtot;
   retTrib?: TNFeInfNFeTotalRetTrib;
+  ISTot?: TNFeInfNFeTotalISTot;
+  IBSCBSTot?: TNFeInfNFeTotalIBSCBSTot;
+  vNFTot?: string;
 }
 interface TNFeInfNFeTotalRetTrib {
   vRetPIS: string;
