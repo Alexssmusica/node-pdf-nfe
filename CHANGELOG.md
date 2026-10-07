@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.3.0...v1.3.1) (2026-10-07)
+
+
+### Bug Fixes
+
+* **danfe:** impede a ultima linha do item de cruzar a divisoria ([64e326e](https://github.com/Alexssmusica/node-pdf-nfe/commit/64e326e1caa1d229018a385492ca5296f98d34da))
+
 # [1.3.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.2.24...v1.3.0) (2026-10-07)
 
 
