@@ -8,7 +8,7 @@ export function getTotalIbsCbsIs(input: GeneratePdf.InputImposto): number {
     ...input,
     tituloSecao: 'TOTAL DO IBS / CBS / IS',
     tamanhoTitulo: 5.5,
-    alturaLinha: 22,
+    alturaLinha: input.geometria.alturaLinhaTotalIbsCbsIs,
     linhas: [
       [
         { titulo: 'VALOR DA CBS', valor: moeda(ibsCbs?.gCBS?.vCBS) },

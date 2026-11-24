@@ -2,7 +2,9 @@ import { formatNumber } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf, TNFeInfNFeDet } from '../../../../types';
 import { moeda } from './bloco-totais';
 import { DEFAULT_NFE } from './default';
+import type { GeometriaDanfe } from './geometria-nfe';
 import { colunasItem } from './grade-colunas';
+import type { ColunasItem } from './grade-colunas';
 import { normal } from './normal';
 
 const LINE_GAP = -1.5;
@@ -10,7 +12,10 @@ const PADDING_CELULA = 1.5;
 const LARGURA_SEPARADOR = 4;
 const TAMANHO_MINIMO = 3.5;
 
-type CtxItem = Pick<GeneratePdf.InputCriaMargem, 'doc' | 'ajusteX' | 'ajusteY' | 'margemEsquerda' | 'margemTopo' | 'larguraDoFormulario'>;
+type CtxItem = Pick<
+  GeneratePdf.InputCriaMargem,
+  'doc' | 'ajusteX' | 'ajusteY' | 'margemEsquerda' | 'margemTopo' | 'larguraDoFormulario' | 'geometria'
+>;
 
 type VisaoIcms = {
   orig?: string;
@@ -107,8 +112,13 @@ function alturaLinha(doc: PDFKit.PDFDocument): number {
   return doc.heightOfString('Ag', { width: 80, lineGap: LINE_GAP });
 }
 
-function tamanhoQueCabe(doc: PDFKit.PDFDocument, texto: string, largura: number): number {
-  let tamanho = DEFAULT_NFE.tamanhoDaFonteDosItens;
+function tamanhoQueCabe(
+  doc: PDFKit.PDFDocument,
+  texto: string,
+  largura: number,
+  tamanhoInicial = DEFAULT_NFE.tamanhoDaFonteDosItens
+): number {
+  let tamanho = tamanhoInicial;
   doc.font('normal').fontSize(tamanho);
   while (texto && tamanho > TAMANHO_MINIMO && doc.widthOfString(texto) > largura) {
     tamanho -= 0.25;
@@ -144,9 +154,10 @@ function desenharUmaLinha(
   x: number,
   y: number,
   largura: number,
-  alinhamento: 'left' | 'center' | 'right'
+  alinhamento: 'left' | 'center' | 'right',
+  tamanhoInicial = DEFAULT_NFE.tamanhoDaFonteDosItens
 ): void {
-  desenharTrecho(ctx, value, x, y, largura, alinhamento, tamanhoQueCabe(ctx.doc, value, largura));
+  desenharTrecho(ctx, value, x, y, largura, alinhamento, tamanhoQueCabe(ctx.doc, value, largura, tamanhoInicial));
 }
 
 function desenharRotuloValor(ctx: CtxItem, y: number, x: number, largura: number, rotulo: string, valor: string): void {
@@ -192,15 +203,29 @@ function areaCelula(coluna: { x: number; largura: number }): { x: number; largur
   };
 }
 
-export function medirItem(doc: PDFKit.PDFDocument, item: TNFeInfNFeDet, larguraFormulario: number): number {
-  const { colunas } = colunasItem(larguraFormulario);
+function alturaLinhaFonte(doc: PDFKit.PDFDocument, tamanho: number): number {
+  doc.font('normal').fontSize(tamanho);
+  return doc.heightOfString('Ag', { width: 80, lineGap: LINE_GAP });
+}
+
+function desenharQtdUn(ctx: CtxItem, colunas: ColunasItem, item: TNFeInfNFeDet, y: number): void {
+  const area = areaCelula(colunas.qtdUn);
+  const tamanho = ctx.geometria.tamanhoDaFonteQtdValoresItem;
+  const passo = alturaLinhaFonte(ctx.doc, tamanho);
+  desenharUmaLinha(ctx, formatNumber(item.prod.qCom, 4), area.x, y, area.largura, 'center', tamanho);
+  desenharUmaLinha(ctx, `[${item.prod.uCom}]`, area.x, y + passo, area.largura, 'center', tamanho);
+}
+
+export function medirItem(doc: PDFKit.PDFDocument, item: TNFeInfNFeDet, larguraFormulario: number, geometria: GeometriaDanfe): number {
+  const { colunas } = colunasItem(larguraFormulario, geometria.fracoesColunaItem);
   const linha = alturaLinha(doc);
+  doc.font('normal').fontSize(geometria.tamanhoDaFonteDaDescricaoItem);
   const alturaDescricao = doc.heightOfString(textoDescricao(item), { width: colunas.descricao.largura, lineGap: LINE_GAP });
   return Math.max(alturaDescricao, linha * 4) - LINE_GAP;
 }
 
 export function desenharItem(ctx: CtxItem, item: TNFeInfNFeDet, y: number): number {
-  const { colunas } = colunasItem(ctx.larguraDoFormulario);
+  const { colunas } = colunasItem(ctx.larguraDoFormulario, ctx.geometria.fracoesColunaItem);
   const linha = alturaLinha(ctx.doc);
   const icms = lerIcms(item);
   const ibs = grupoIbsCbs(item);
@@ -211,7 +236,7 @@ export function desenharItem(ctx: CtxItem, item: TNFeInfNFeDet, y: number): numb
   const ipi = item.imposto.IPI?.IPITrib;
   const codigoCst = icms.CST ?? icms.CSOSN ?? '';
   const origem = icms.orig ?? '';
-  const altura = medirItem(ctx.doc, item, ctx.larguraDoFormulario);
+  const altura = medirItem(ctx.doc, item, ctx.larguraDoFormulario, ctx.geometria);
 
   normal({
     doc: ctx.doc,
@@ -220,7 +245,7 @@ export function desenharItem(ctx: CtxItem, item: TNFeInfNFeDet, y: number): numb
     y,
     largura: colunas.descricao.largura,
     alinhamento: 'left',
-    tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens,
+    tamanho: ctx.geometria.tamanhoDaFonteDaDescricaoItem,
     ajusteX: ctx.ajusteX,
     ajusteY: ctx.ajusteY,
     margemEsquerda: ctx.margemEsquerda,
@@ -228,21 +253,10 @@ export function desenharItem(ctx: CtxItem, item: TNFeInfNFeDet, y: number): numb
   });
   desenharRotuloValor(ctx, y, colunas.cstCfop.x, colunas.cstCfop.largura, 'CST', `${origem}${codigoCst ? `/${codigoCst}` : ''}`);
   desenharRotuloValor(ctx, y + linha, colunas.cstCfop.x, colunas.cstCfop.largura, 'CFOP', item.prod.CFOP);
-  normal({
-    doc: ctx.doc,
-    value: `${formatNumber(item.prod.qCom, 4)}\n[${item.prod.uCom}]`,
-    x: colunas.qtdUn.x,
-    y,
-    largura: colunas.qtdUn.largura,
-    alinhamento: 'center',
-    tamanho: DEFAULT_NFE.tamanhoDaFonteDosItens,
-    ajusteX: ctx.ajusteX,
-    ajusteY: ctx.ajusteY,
-    margemEsquerda: ctx.margemEsquerda,
-    margemTopo: ctx.margemTopo
-  });
-  desenharUmaLinha(ctx, formatNumber(item.prod.vUnCom, 2), colunas.vlrUnit.x, y, colunas.vlrUnit.largura, 'right');
-  desenharUmaLinha(ctx, formatNumber(item.prod.vProd, 2), colunas.vlrTotal.x, y, colunas.vlrTotal.largura, 'right');
+  desenharQtdUn(ctx, colunas, item, y);
+  const tamanhoValores = ctx.geometria.tamanhoDaFonteQtdValoresItem;
+  desenharUmaLinha(ctx, formatNumber(item.prod.vUnCom, 2), colunas.vlrUnit.x, y, colunas.vlrUnit.largura, 'right', tamanhoValores);
+  desenharUmaLinha(ctx, formatNumber(item.prod.vProd, 2), colunas.vlrTotal.x, y, colunas.vlrTotal.largura, 'right', tamanhoValores);
 
   const bases: Array<[string, string]> = [
     ['ICMS', moeda(icms.vBC)],

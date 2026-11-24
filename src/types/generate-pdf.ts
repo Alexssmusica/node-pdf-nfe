@@ -8,12 +8,16 @@ import type {
   TNFeInfNFeTotal,
   TNFeInfNFeTransp
 } from '.';
+import type { GeometriaDanfe, OrientacaoDanfe } from '../application/helpers/generate-pdf/nfe/geometria-nfe';
 import type { NFeProc, ProtNFe } from './nfe-proc';
+
+export type { GeometriaDanfe, OrientacaoDanfe };
 
 export type OpcoesPDF = {
   pathLogo?: string;
   cancelada?: boolean;
   notEndDocument?: boolean;
+  orientacao?: OrientacaoDanfe;
 };
 
 export type Alinhamento = PDFKit.Mixins.TextOptions['align'];
@@ -66,6 +70,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     margemTopo: number;
     margemEsquerda: number;
+    tracejada?: boolean;
   };
   type InputCriaMargem = {
     doc: PDFKit.PDFDocument;
@@ -75,6 +80,7 @@ export declare namespace GeneratePdf {
     margemEsquerda: number;
     margemDireita: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     nf: NFeProc;
     pathLogo?: string;
     cancelada?: boolean;
@@ -87,6 +93,7 @@ export declare namespace GeneratePdf {
     margemEsquerda: number;
     margemDireita: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     nf: NFeProc;
     folha: number;
     pathLogo?: string;
@@ -105,6 +112,7 @@ export declare namespace GeneratePdf {
     ajusteY: number;
     alinhamento?: Alinhamento;
     tamanho?: number;
+    linhaUnica?: boolean;
   };
   type InputNormal = {
     x: number;
@@ -177,6 +185,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     protNFe: ProtNFe;
     cancelada?: boolean;
     folha?: number;
@@ -188,6 +197,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     folha?: number;
   };
   type InputRecibo = {
@@ -199,6 +209,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     dest: TNFeInfNFeDest;
     emit: TNFeInfNFeEmit;
     total: TNFeInfNFeTotal;
@@ -213,6 +224,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     emit: TNFeInfNFeEmit;
     ide: TNFeInfNFeIde;
     protNFe: ProtNFe;
@@ -228,6 +240,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     dest: TNFeInfNFeDest;
     ide: TNFeInfNFeIde;
   };
@@ -240,6 +253,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     total: TNFeInfNFeTotal;
   };
   type InputFaturaDuplicata = {
@@ -251,6 +265,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     cobr?: TNFeInfNFeCobr;
   };
   type InputTransporte = {
@@ -262,6 +277,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     transp: TNFeInfNFeTransp;
   };
   type InputISS = {
@@ -273,6 +289,7 @@ export declare namespace GeneratePdf {
     ajusteX: number;
     ajusteY: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     emit: TNFeInfNFeEmit;
     total: TNFeInfNFeTotal;
   };
@@ -286,6 +303,7 @@ export declare namespace GeneratePdf {
     margemDireita: number;
     finalEspacoDet: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
   };
   type InputDadosAdicionais = {
     doc: PDFKit.PDFDocument;
@@ -295,6 +313,7 @@ export declare namespace GeneratePdf {
     margemDireita: number;
     margemTopo: number;
     larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
     infAdic: TNFeInfNFeInfAdic;
     finalEspacoDet: number;
     earlyClose?: boolean;

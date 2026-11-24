@@ -15,6 +15,7 @@ export function getRecibo({
   margemEsquerda,
   margemTopo,
   larguraDoFormulario,
+  geometria: _geometria,
   dest,
   emit,
   total,

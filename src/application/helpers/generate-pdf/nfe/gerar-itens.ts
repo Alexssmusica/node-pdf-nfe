@@ -1,4 +1,5 @@
 import type { GeneratePdf } from '../../../../types';
+import { optionsDocFromGeometria } from './geometria-nfe';
 import { criaLayout } from './cria-layout';
 import { DEFAULT_NFE } from './default';
 import { getDadosAdicionais } from './get-dados-adicionais';
@@ -6,7 +7,6 @@ import { getHomologacao } from './get-homologacao';
 import { getNotaCancelada } from './get-nota-cancelada';
 import { desenharItem, medirItem } from './item-danfe';
 import { linhaHorizontal } from './linha-horizontal';
-import { optionsDocNFe } from './options-doc';
 
 const ESPACO_ITEM = 2;
 
@@ -19,11 +19,15 @@ export async function gerarItens({
   margemTopo,
   margemDireita,
   larguraDoFormulario,
+  geometria,
   pathLogo,
   cancelada
 }: GeneratePdf.InputCriaMargem): Promise<void> {
   let folha = 0;
   const qrCode = nf.NFe.infNFeSupl?.qrCode;
+  const det = nf.NFe.infNFe.det;
+  const alturasItens = det.map((item) => ESPACO_ITEM + medirItem(doc, item, larguraDoFormulario, geometria) + ESPACO_ITEM);
+
   let overflowTextAdicionais = await criaLayout({
     ajusteX,
     ajusteY,
@@ -33,6 +37,7 @@ export async function gerarItens({
     margemDireita,
     margemEsquerda,
     margemTopo,
+    geometria,
     pathLogo,
     folha,
     cancelada
@@ -42,6 +47,9 @@ export async function gerarItens({
   let itensNaFolha = 0;
 
   const { ide } = nf.NFe.infNFe;
+  function deveMarcar(folhaAtual: number): boolean {
+    return folhaAtual > 0 || geometria.marcaDaguaAposConteudo;
+  }
   function desenharMarcas(folhaAtual: number): void {
     if (ide.tpAmb === '2') {
       getHomologacao({
@@ -51,27 +59,20 @@ export async function gerarItens({
         margemEsquerda,
         margemTopo,
         larguraDoFormulario,
+        geometria,
         protNFe: nf.protNFe,
         cancelada,
         folha: folhaAtual
       });
     } else if (ide.tpAmb === '1' && cancelada) {
-      getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, folha: folhaAtual });
+      getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, geometria, folha: folhaAtual });
     }
   }
 
-  function fecharAreaItens(yRel: number): void {
-    doc
-      .rect(margemEsquerda + ajusteX - 1, margemTopo + ajusteY + yRel, larguraDoFormulario + 2, DEFAULT_NFE.fundoDaPagina + 1.5 - yRel)
-      .fillColor('white')
-      .fill();
-    linhaHorizontal({ x1: 0, x2: 0, y: yRel, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  }
-
   function limiteGrade(): number {
-    if (folha === 0) return DEFAULT_NFE.finalTamanhoDet1;
-    if (!dadosAdicionaisProcessado) return DEFAULT_NFE.fundoDaPagina - DEFAULT_NFE.reservaDadosAdicionais;
-    return DEFAULT_NFE.finalTamanhoDetDemais;
+    if (folha === 0) return geometria.finalTamanhoDet1;
+    if (!dadosAdicionaisProcessado) return geometria.fundoDaPagina - geometria.reservaDadosAdicionais;
+    return geometria.finalTamanhoDetDemais;
   }
 
   async function quebrarPagina(): Promise<void> {
@@ -85,6 +86,7 @@ export async function gerarItens({
         margemDireita,
         margemEsquerda,
         margemTopo,
+        geometria,
         finalEspacoDet: maiorY,
         fecharAposConteudo: true,
         qrCode
@@ -94,8 +96,8 @@ export async function gerarItens({
         dadosAdicionaisProcessado = !restante;
       }
     }
-    if (folha > 0) desenharMarcas(folha);
-    doc.addPage(optionsDocNFe);
+    if (deveMarcar(folha)) desenharMarcas(folha);
+    doc.addPage(optionsDocFromGeometria(geometria));
     doc.y = 0;
     folha++;
     await criaLayout({
@@ -107,6 +109,7 @@ export async function gerarItens({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       pathLogo,
       folha,
       cancelada
@@ -114,11 +117,10 @@ export async function gerarItens({
     maiorY = doc.y;
   }
 
-  const ctx = { doc, ajusteX, ajusteY, margemEsquerda, margemTopo, larguraDoFormulario };
-  for (let i = 0; i < nf.NFe.infNFe.det.length; i++) {
-    const item = nf.NFe.infNFe.det[i];
-    const altura = medirItem(doc, item, larguraDoFormulario);
-    const ocupacao = ESPACO_ITEM + altura + ESPACO_ITEM;
+  const ctx = { doc, ajusteX, ajusteY, margemEsquerda, margemTopo, larguraDoFormulario, geometria };
+  for (let i = 0; i < det.length; i++) {
+    const item = det[i];
+    const ocupacao = alturasItens[i];
     if (itensNaFolha > 0 && maiorY + ocupacao > limiteGrade()) {
       await quebrarPagina();
       itensNaFolha = 0;
@@ -134,7 +136,7 @@ export async function gerarItens({
   let guardAdicionais = 0;
   while (overflowTextAdicionais && !dadosAdicionaisProcessado && guardAdicionais < 8) {
     guardAdicionais++;
-    const cabeNaFolha = folha > 0 && maiorY <= DEFAULT_NFE.fundoDaPagina - DEFAULT_NFE.reservaDadosAdicionais;
+    const cabeNaFolha = folha > 0 && maiorY <= geometria.fundoDaPagina - geometria.reservaDadosAdicionais;
     if (cabeNaFolha) {
       const restante = await getDadosAdicionais({
         ajusteX,
@@ -145,6 +147,7 @@ export async function gerarItens({
         margemDireita,
         margemEsquerda,
         margemTopo,
+        geometria,
         finalEspacoDet: maiorY,
         fecharAposConteudo: true,
         qrCode
@@ -152,12 +155,12 @@ export async function gerarItens({
       if (restante !== overflowTextAdicionais) {
         overflowTextAdicionais = restante;
         dadosAdicionaisProcessado = !restante;
-        maiorY = DEFAULT_NFE.fundoDaPagina;
+        maiorY = geometria.fundoDaPagina;
         continue;
       }
     }
-    if (folha > 0) desenharMarcas(folha);
-    doc.addPage(optionsDocNFe);
+    if (deveMarcar(folha)) desenharMarcas(folha);
+    doc.addPage(optionsDocFromGeometria(geometria));
     doc.y = 0;
     folha++;
     itensNaFolha = 0;
@@ -170,6 +173,7 @@ export async function gerarItens({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       pathLogo,
       folha,
       cancelada,
@@ -180,9 +184,6 @@ export async function gerarItens({
     dadosAdicionaisProcessado = !restante;
     maiorY = doc.y;
   }
-  if (dadosAdicionaisProcessado && folha > 0 && itensNaFolha > 0 && maiorY < DEFAULT_NFE.fundoDaPagina) {
-    fecharAreaItens(maiorY);
-  }
 
-  if (folha > 0) desenharMarcas(folha);
+  if (deveMarcar(folha)) desenharMarcas(folha);
 }

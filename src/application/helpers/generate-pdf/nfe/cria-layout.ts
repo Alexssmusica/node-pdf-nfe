@@ -1,5 +1,4 @@
 import type { GeneratePdf } from '../../../../types';
-import { DEFAULT_NFE } from './default';
 import { getDadosAdicionais } from './get-dados-adicionais';
 import { getDadosEmitente } from './get-dados-emitente';
 import { getDestinatarioRemetente } from './get-destinatario-remetente';
@@ -9,6 +8,7 @@ import { getIss } from './get-iss';
 import { getMenuItens } from './get-menu-itens';
 import { getNotaCancelada } from './get-nota-cancelada';
 import { getRecibo } from './get-recibo';
+import { getReciboPaisagem } from './get-recibo-paisagem';
 import { getTotalIbsCbsIs } from './get-total-ibs-cbs-is';
 import { getTotalIcmsIpi } from './get-total-icms-ipi';
 import { getTotalProdutos } from './get-total-produtos';
@@ -24,16 +24,17 @@ export async function criaLayout({
   margemTopo,
   larguraDoFormulario,
   margemDireita,
+  geometria,
   folha,
   cancelada,
   overflowTextAdicionais
 }: GeneratePdf.InputCriaLayout): Promise<string> {
   const { dest, emit, ide, infAdic, total, transp, cobr } = nf.NFe.infNFe;
   let y = 0;
-  const finalEspacoDet = folha === 0 ? DEFAULT_NFE.finalTamanhoDet1 : DEFAULT_NFE.finalTamanhoDetDemais;
+  const finalEspacoDet = folha === 0 ? geometria.finalTamanhoDet1 : geometria.finalTamanhoDetDemais;
   const qrCode = nf.NFe.infNFeSupl?.qrCode;
 
-  if (folha === 0) {
+  if (folha === 0 && !geometria.marcaDaguaAposConteudo) {
     if (ide.tpAmb === '2') {
       getHomologacao({
         ajusteX,
@@ -42,30 +43,50 @@ export async function criaLayout({
         margemEsquerda,
         margemTopo,
         larguraDoFormulario,
+        geometria,
         protNFe: nf.protNFe,
         cancelada,
         folha
       });
     } else if (ide.tpAmb === '1' && cancelada) {
-      getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, folha });
+      getNotaCancelada({ ajusteX, ajusteY, doc, margemEsquerda, margemTopo, larguraDoFormulario, geometria, folha });
     }
   }
 
   if (folha === 0) {
-    y = getRecibo({
-      y,
-      ajusteX,
-      ajusteY,
-      dest,
-      doc,
-      emit,
-      larguraDoFormulario,
-      margemDireita,
-      margemEsquerda,
-      margemTopo,
-      total,
-      ide
-    });
+    if (geometria.desenharCanhotoLateral) {
+      getReciboPaisagem({
+        y,
+        ajusteX,
+        ajusteY,
+        dest,
+        doc,
+        emit,
+        larguraDoFormulario,
+        margemDireita,
+        margemEsquerda,
+        margemTopo,
+        geometria,
+        total,
+        ide
+      });
+    } else {
+      y = getRecibo({
+        y,
+        ajusteX,
+        ajusteY,
+        dest,
+        doc,
+        emit,
+        larguraDoFormulario,
+        margemDireita,
+        margemEsquerda,
+        margemTopo,
+        geometria,
+        total,
+        ide
+      });
+    }
   }
 
   await getDadosEmitente({
@@ -77,6 +98,7 @@ export async function criaLayout({
     margemDireita,
     margemEsquerda,
     margemTopo,
+    geometria,
     protNFe: nf.protNFe,
     y,
     pathLogo,
@@ -93,6 +115,7 @@ export async function criaLayout({
     margemDireita,
     margemEsquerda,
     margemTopo,
+    geometria,
     y: doc.y,
     ide
   });
@@ -107,6 +130,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       finalEspacoDet: y - margemTopo - ajusteY,
       earlyClose: true,
       qrCode
@@ -122,6 +146,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       cobr,
       y
     });
@@ -134,6 +159,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       total,
       y
     });
@@ -146,6 +172,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       total,
       y
     });
@@ -158,6 +185,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       total,
       y
     });
@@ -171,6 +199,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       total,
       y
     });
@@ -183,6 +212,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       transp,
       y
     });
@@ -196,6 +226,7 @@ export async function criaLayout({
       margemDireita,
       margemEsquerda,
       margemTopo,
+      geometria,
       finalEspacoDet,
       qrCode
     });
@@ -209,7 +240,8 @@ export async function criaLayout({
       y,
       margemDireita,
       finalEspacoDet,
-      larguraDoFormulario
+      larguraDoFormulario,
+      geometria
     });
 
     return overflowText;
@@ -224,7 +256,8 @@ export async function criaLayout({
     y,
     margemDireita,
     finalEspacoDet,
-    larguraDoFormulario
+    larguraDoFormulario,
+    geometria
   });
 
   return '';

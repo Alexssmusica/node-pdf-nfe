@@ -1,6 +1,6 @@
 import type { GeneratePdf } from '../../../../types';
 import { DEFAULT_NFE } from './default';
-import { ALTURA_CABECALHO_ITENS, TITULOS_COLUNA_ITEM, colunasItem } from './grade-colunas';
+import { TITULOS_COLUNA_ITEM, colunasItem } from './grade-colunas';
 import { linhaHorizontal } from './linha-horizontal';
 import { linhaVertical } from './linha-vertical';
 import { secao } from './secao';
@@ -15,11 +15,13 @@ export function getMenuItens({
   margemTopo,
   margemDireita,
   finalEspacoDet,
-  larguraDoFormulario
+  larguraDoFormulario,
+  geometria
 }: GeneratePdf.InputMenuItens): number {
+  const alturaCabecalho = geometria.alturaCabecalhoItens;
   const topo = y + 9;
-  const base = topo + ALTURA_CABECALHO_ITENS;
-  const { colunas, divisorias } = colunasItem(larguraDoFormulario);
+  const base = topo + alturaCabecalho;
+  const { colunas, divisorias } = colunasItem(larguraDoFormulario, geometria.fracoesColunaItem);
 
   linhaHorizontal({ x1: -0.5, x2: 0.5, y: topo, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
   linhaHorizontal({ x1: -0.5, x2: 0.5, y: base, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
@@ -41,7 +43,7 @@ export function getMenuItens({
       y: topo + 1.5,
       largura: coluna.largura,
       alinhamento: DEFAULT_NFE.alinhamentoDoTituloDaTabela,
-      tamanho: 5.5,
+      tamanho: geometria.tamanhoTituloColunaItem,
       ajusteX,
       ajusteY,
       doc,

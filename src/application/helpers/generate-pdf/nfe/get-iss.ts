@@ -9,7 +9,7 @@ export function getIss(input: GeneratePdf.InputISS): number {
     ...input,
     tituloSecao: 'CÁLCULO DO ISSQN',
     tamanhoTitulo: 6,
-    alturaLinha: 20,
+    alturaLinha: input.geometria.alturaLinhaIssqn,
     linhas: [
       [
         { titulo: 'INSCRIÇÃO MUNICIPAL', valor: input.emit?.IM ?? '' },

@@ -9,6 +9,7 @@ import {
   formatStateRegistration
 } from '../../../../domain/use-cases/utils';
 import type { GeneratePdf } from '../../../../types';
+import { celulasComPeso } from './celulas-layout';
 import { campo } from './campo';
 import { DEFAULT_NFE } from './default';
 import { italico } from './italico';
@@ -27,39 +28,97 @@ export async function getDadosEmitente({
   margemEsquerda,
   margemTopo,
   larguraDoFormulario,
+  geometria,
   emit,
   protNFe,
   pathLogo,
   ide,
   folha
 }: GeneratePdf.InputDadosEmitente): Promise<void> {
-  linhaHorizontal({ x1: 317, x2: -254.7, y: y + 53.1, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 317, x2: -254.7, y: y + 72.9, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 53.1, y2: y + 72.9, x: 317.4, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 53.1, y2: y + 72.9, x: 331.55, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 0, x2: 0, y: y + 15.25, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 340.05, x2: 0, y: y + 60.5, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 340.05, x2: 0, y: y + 83.1, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 0, x2: 0, y: y + 105.9, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 0, x2: 0, y: y + 125.7, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaHorizontal({ x1: 0, x2: 0, y: y + 145.7, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 15.25, y2: y + 145.7, x: 0, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 15.25, y2: y + 105.7, x: 240.75, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 15.25, y2: y + 125.7, x: 340.05, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
-  linhaVertical({ y1: y + 15.25, y2: y + 145.7, x: larguraDoFormulario, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+  const [colEmitente, colDanfe, colChave] = celulasComPeso(larguraDoFormulario, [241, 99, 247]);
+  const xDivDanfe = colDanfe.x;
+  const xDivChave = colChave.x;
+  const escalaVertical = geometria.alturaBlocoEmitente / 130.45;
+  const sy = (delta: number) => y + delta * escalaVertical;
+  const escalaFonte = geometria.orientacao === 'PAISAGEM' ? escalaVertical : 1;
+  const tCampo = geometria.tamanhoDaFonteDoCampo;
+  const xEntradaSaida = colDanfe.x + colDanfe.largura * 0.07;
+  const inicioQuadradoTpNf = geometria.orientacao === 'PAISAGEM' ? 0.77 : 0.75;
+  const fimQuadradoTpNf = geometria.orientacao === 'PAISAGEM' ? 0.87 : 0.95;
+  const xTpNf = colDanfe.x + colDanfe.largura * inicioQuadradoTpNf;
+  const larguraTpNf = colDanfe.largura * (fimQuadradoTpNf - inicioQuadradoTpNf);
+  const xTituloDanfe = colDanfe.x + colDanfe.largura * 0.26;
+  const xNumeroSerie = colDanfe.x + 0.5;
+  const larguraDanfe = colDanfe.largura - 1;
+  const larguraChave = colChave.largura - 3;
+  const larguraNatOp = xDivChave - 1.5;
+  const larguraEmitente = colEmitente.largura - 3;
+
+  linhaHorizontal({
+    x1: xDivDanfe,
+    x2: -colChave.largura,
+    y: sy(53.1),
+    doc,
+    ajusteX,
+    ajusteY,
+    margemDireita,
+    margemEsquerda,
+    margemTopo
+  });
+  linhaHorizontal({
+    x1: xDivDanfe,
+    x2: -colChave.largura,
+    y: sy(72.9),
+    doc,
+    ajusteX,
+    ajusteY,
+    margemDireita,
+    margemEsquerda,
+    margemTopo
+  });
+  linhaVertical({
+    y1: sy(53.1),
+    y2: sy(72.9),
+    x: xDivDanfe + colDanfe.largura * inicioQuadradoTpNf,
+    doc,
+    ajusteX,
+    ajusteY,
+    margemEsquerda,
+    margemTopo
+  });
+  linhaVertical({
+    y1: sy(53.1),
+    y2: sy(72.9),
+    x: xDivDanfe + colDanfe.largura * fimQuadradoTpNf,
+    doc,
+    ajusteX,
+    ajusteY,
+    margemEsquerda,
+    margemTopo
+  });
+  linhaHorizontal({ x1: 0, x2: 0, y: sy(15.25), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaHorizontal({ x1: xDivChave, x2: 0, y: sy(60.5), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaHorizontal({ x1: xDivChave, x2: 0, y: sy(83.1), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaHorizontal({ x1: 0, x2: 0, y: sy(105.9), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaHorizontal({ x1: 0, x2: 0, y: sy(125.7), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaHorizontal({ x1: 0, x2: 0, y: sy(145.7), doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
+  linhaVertical({ y1: sy(15.25), y2: sy(145.7), x: 0, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+  linhaVertical({ y1: sy(15.25), y2: sy(105.7), x: xDivDanfe, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+  linhaVertical({ y1: sy(15.25), y2: sy(125.7), x: xDivChave, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+  linhaVertical({ y1: sy(15.25), y2: sy(145.7), x: larguraDoFormulario, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
   const faixasEmitente = faixasIdentificacaoEmitente(larguraDoFormulario, emit);
   faixasEmitente.forEach((faixa, indice) => {
     if (indice > 0) {
-      linhaVertical({ y1: y + 125.7, y2: y + 145.7, x: faixa.x, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
+      linhaVertical({ y1: sy(125.7), y2: sy(145.7), x: faixa.x, doc, ajusteX, ajusteY, margemEsquerda, margemTopo });
     }
   });
   titulo({
     value: 'DANFE',
-    x: 266.5,
-    y: y + 19.2,
-    largura: 197,
+    x: xTituloDanfe,
+    y: sy(19.2),
+    largura: colDanfe.largura + colChave.largura * 0.2,
     alinhamento: 'left',
-    tamanho: 14,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 14 * escalaFonte : 14,
     ajusteX,
     ajusteY,
     doc,
@@ -70,29 +129,38 @@ export async function getDadosEmitente({
     doc,
     value: 'IDENTIFICAÇÃO DO EMITENTE',
     x: 1,
-    y: y + 15.7,
-    largura: 238,
+    y: sy(15.7),
+    largura: larguraEmitente,
     alinhamento: 'center',
-    tamanho: 10,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 10 * escalaFonte : 10,
     ajusteX,
     ajusteY,
     margemEsquerda,
     margemTopo
   });
 
-  const identificacaoDoEmitenteY = pathLogo !== undefined ? y + 33.7 : y + 39.7;
-  const identificacaoDoEmitenteX = pathLogo !== undefined ? 67 : 1.5;
-  const identificacaoDoEmitenteLargura = pathLogo !== undefined ? 172 : 237;
+  const identificacaoDoEmitenteY = pathLogo !== undefined ? sy(33.7) : sy(39.7);
+  const identificacaoDoEmitenteX = pathLogo !== undefined ? colEmitente.x + colEmitente.largura * 0.27 : 1.5;
+  const identificacaoDoEmitenteLargura = pathLogo !== undefined ? colEmitente.largura * 0.72 : larguraEmitente;
   const identificacaoDoEmitenteFonte = pathLogo !== undefined ? 0 : 1.5;
 
   if (pathLogo !== undefined) {
-    if (folha === 0) {
-      doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 78, {
-        fit: [60, 60]
-      });
+    if (geometria.alturaCanhotoTopo > 0) {
+      if (folha === 0) {
+        doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 78, {
+          fit: [60, 60]
+        });
+      } else {
+        doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 33, {
+          fit: [60, 60]
+        });
+      }
     } else {
-      doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + DEFAULT_NFE.ajusteYDoLogotipo + 33, {
-        fit: [60, 60]
+      const topoLogo = sy(26);
+      const larguraDisponivelLogo = colEmitente.largura * 0.27 - 9;
+      const tamanhoLogoPaisagem = Math.min(sy(103) - topoLogo, larguraDisponivelLogo);
+      doc.image(pathLogo, margemEsquerda + ajusteX + 4.5, margemTopo + ajusteY + topoLogo, {
+        fit: [tamanhoLogoPaisagem, tamanhoLogoPaisagem]
       });
     }
   }
@@ -172,11 +240,11 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: 'Documento Auxiliar da Nota Fiscal Eletrônica',
-    x: 241.5,
-    y: y + 32.7,
-    largura: 99.5,
+    x: xNumeroSerie,
+    y: sy(32.7),
+    largura: larguraDanfe,
     alinhamento: 'center',
-    tamanho: 10,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 6.5 * escalaFonte : 10,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -185,9 +253,9 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: '0 - ENTRADA',
-    x: 248,
-    y: y + 55.7,
-    largura: 99.5,
+    x: xEntradaSaida,
+    y: sy(55.7),
+    largura: larguraDanfe,
     alinhamento: 'left',
     ajusteX,
     ajusteY,
@@ -197,9 +265,9 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: '1 - SAÍDA',
-    x: 248,
-    y: y + 64.2,
-    largura: 99.5,
+    x: xEntradaSaida,
+    y: sy(64.2),
+    largura: larguraDanfe,
     alinhamento: 'left',
     ajusteX,
     ajusteY,
@@ -210,11 +278,11 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: ide.tpNF,
-    x: 317.5,
-    y: y + 52.5,
-    largura: 14.5,
+    x: xTpNf,
+    y: sy(52.5),
+    largura: larguraTpNf,
     alinhamento: 'center',
-    tamanho: 18,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 18 * escalaFonte : 18,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -223,9 +291,9 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: 'Consulta de autenticidade no portal nacional da NF-e',
-    x: 340.5,
-    y: y + 85.7,
-    largura: 244,
+    x: xDivChave + 1.5,
+    y: sy(85.7),
+    largura: larguraChave,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -234,9 +302,9 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: 'www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora',
-    x: 340.5,
-    y: y + 93.7,
-    largura: 244,
+    x: xDivChave + 1.5,
+    y: sy(93.7),
+    largura: larguraChave,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -246,11 +314,11 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: 'Nº. ' + ide.nNF.padStart(9, '0').replace(/(\d{3})(\d{3})(\d{3})/, '$1.$2.$3'),
-    x: 241.2,
-    y: y + 75.2,
-    largura: 98.5,
+    x: xNumeroSerie,
+    y: sy(75.2),
+    largura: larguraDanfe,
     alinhamento: 'center',
-    tamanho: 10,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 10 * escalaFonte : 10,
     ajusteX,
     ajusteY,
     margemEsquerda,
@@ -259,30 +327,67 @@ export async function getDadosEmitente({
   normal({
     doc,
     value: 'Série ' + ide.serie,
-    x: 241.2,
-    y: y + 85.2,
-    largura: 98.5,
+    x: xNumeroSerie,
+    y: sy(85.2),
+    largura: larguraDanfe,
     alinhamento: 'center',
-    tamanho: 10,
+    tamanho: geometria.orientacao === 'PAISAGEM' ? 10 * escalaFonte : 10,
     ajusteX,
     ajusteY,
     margemEsquerda,
     margemTopo
   });
-  const options = {
-    bcid: 'code128',
-    text: protNFe.infProt.chNFe,
-    height: 15,
-    width: 130
-  };
+  const options =
+    geometria.orientacao === 'PAISAGEM'
+      ? {
+          bcid: 'code128',
+          text: protNFe.infProt.chNFe,
+          height: 10,
+          scale: 3,
+          includetext: false
+        }
+      : {
+          bcid: 'code128',
+          text: protNFe.infProt.chNFe,
+          height: 15,
+          width: 130
+        };
   const barcodeCep = await Bwipjs.toBuffer(options);
-  doc.image(barcodeCep, 350, y + 22.7, { fit: [230, 50] });
-  titulo({ value: 'CHAVE DE ACESSO', x: 341.5, y: y + 61.2, largura: 244, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  if (geometria.orientacao === 'PAISAGEM') {
+    const topoCelulaChave = sy(15.25);
+    const baseCelulaChave = sy(60.5);
+    const alturaUtilBarra = baseCelulaChave - topoCelulaChave - 5;
+    const larguraBarra = colChave.largura * 0.85;
+    const xBarra = xDivChave + (colChave.largura - larguraBarra) / 2;
+    doc.image(barcodeCep, margemEsquerda + ajusteX + xBarra, margemTopo + ajusteY + topoCelulaChave + 2.5, {
+      fit: [larguraBarra, alturaUtilBarra],
+      align: 'center',
+      valign: 'center'
+    });
+  } else {
+    const posYBarra = sy(22.7);
+    const fitBarra: [number, number] = [Math.min(230, larguraChave), 50];
+    doc.image(barcodeCep, margemEsquerda + ajusteX + xDivChave + 10, margemTopo + ajusteY + posYBarra, {
+      fit: fitBarra
+    });
+  }
+  titulo({
+    value: 'CHAVE DE ACESSO',
+    x: xDivChave + 1.5,
+    y: sy(61.2),
+    largura: larguraChave,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   campo({
     value: formatKey(protNFe.infProt.chNFe),
-    x: 341.5,
-    y: y + 67.7,
-    largura: 244,
+    x: xDivChave + 1.5,
+    y: sy(67.7),
+    largura: larguraChave,
+    tamanho: tCampo,
     ajusteX,
     ajusteY,
     doc,
@@ -291,9 +396,9 @@ export async function getDadosEmitente({
   });
   titulo({
     value: 'PROTOCOLO DE AUTORIZAÇÃO DE USO',
-    x: 341.5,
-    y: y + 106.7,
-    largura: 244,
+    x: xDivChave + 1.5,
+    y: sy(106.7),
+    largura: larguraChave,
     ajusteX,
     ajusteY,
     doc,
@@ -302,22 +407,44 @@ export async function getDadosEmitente({
   });
   campo({
     value: `${formatProtocol(protNFe.infProt.nProt)} - ${formatDateTime(protNFe.infProt.dhRecbto)}`,
-    x: 341.5,
-    y: y + 114.1,
-    largura: 244,
+    x: xDivChave + 1.5,
+    y: sy(114.1),
+    largura: larguraChave,
+    tamanho: tCampo,
     ajusteX,
     ajusteY,
     doc,
     margemEsquerda,
     margemTopo
   });
-  titulo({ value: 'NATUREZA DA OPERAÇÃO', x: 1.5, y: y + 106.7, largura: 338, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
-  campo({ value: ide.natOp, x: 1.5, y: y + 114.1, largura: 338, ajusteX, ajusteY, doc, margemEsquerda, margemTopo });
+  titulo({
+    value: 'NATUREZA DA OPERAÇÃO',
+    x: 1.5,
+    y: sy(106.7),
+    largura: larguraNatOp,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
+  campo({
+    value: ide.natOp,
+    x: 1.5,
+    y: sy(114.1),
+    largura: larguraNatOp,
+    tamanho: tCampo,
+    ajusteX,
+    ajusteY,
+    doc,
+    margemEsquerda,
+    margemTopo
+  });
   faixasEmitente.forEach((faixa) => {
     titulo({
       value: faixa.titulo,
       x: faixa.x + 1.5,
-      y: y + 126.7,
+      y: sy(126.7),
       largura: faixa.largura - 3,
       tamanho: faixa.titulo.length > 32 ? 5 : 6,
       ajusteX,
@@ -330,7 +457,8 @@ export async function getDadosEmitente({
       campo({
         value: faixa.valor,
         x: faixa.x + 1.5,
-        y: y + 134.1,
+        y: sy(134.1),
+        tamanho: tCampo,
         largura: faixa.largura - 3,
         ajusteX,
         ajusteY,
@@ -341,7 +469,7 @@ export async function getDadosEmitente({
     }
   });
 
-  doc.y = margemTopo + ajusteY + y + 145.7;
+  doc.y = margemTopo + ajusteY + sy(145.7);
 }
 
 function descricaoCrt(crt: string): string {

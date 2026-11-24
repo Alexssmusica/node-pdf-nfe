@@ -7,7 +7,7 @@ export function getTotalProdutos(input: GeneratePdf.InputImposto): number {
     ...input,
     tituloSecao: 'TOTAL DOS PRODUTOS E TOTAL DA NOTA',
     tamanhoTitulo: 6,
-    alturaLinha: 20,
+    alturaLinha: input.geometria.alturaLinhaTotalProdutos,
     linhas: [
       [
         { titulo: 'VALOR TOTAL DOS PRODUTOS', valor: moeda(icms.vProd) },

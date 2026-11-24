@@ -3,6 +3,7 @@ import type { GeneratePdf } from '../../../../types';
 import { campo } from './campo';
 import { linhaHorizontal } from './linha-horizontal';
 import { linhaVertical } from './linha-vertical';
+import { offsetsLinha } from './linha-campos';
 import { secao } from './secao';
 import { titulo } from './titulo';
 
@@ -32,6 +33,7 @@ export function desenharBlocoTotais({
   margemEsquerda,
   margemTopo,
   larguraDoFormulario,
+  geometria,
   tituloSecao,
   linhas,
   tamanhoTitulo,
@@ -43,6 +45,10 @@ export function desenharBlocoTotais({
   secao({ doc, value: tituloSecao, x: 1.5, y: y + 0.9, largura: 0, ajusteX, ajusteY, margemEsquerda, margemTopo });
   linhaHorizontal({ x1: 0, x2: 0, y: topo, doc, ajusteX, ajusteY, margemDireita, margemEsquerda, margemTopo });
 
+  const tamanhoTituloEfetivo =
+    geometria.orientacao === 'PAISAGEM' ? Math.min(tamanhoTitulo, geometria.tamanhoDaFonteDoTitulo) : tamanhoTitulo;
+  const tamanhoCampo = geometria.tamanhoDaFonteDoCampo - 1.5;
+  const off = offsetsLinha(geometria, alturaLinha, tamanhoTituloEfetivo, tamanhoCampo, { titulo: 1.2, campo: alturaLinha - 11 });
   linhas.forEach((campos, indice) => {
     const yLinha = topo + indice * alturaLinha;
     const yBase = yLinha + alturaLinha;
@@ -56,9 +62,10 @@ export function desenharBlocoTotais({
       titulo({
         value: campoTotal.titulo,
         x: x + 1.5,
-        y: yLinha + 1.2,
+        y: yLinha + off.titulo,
         largura: larguraColuna - 3,
-        tamanho: tamanhoTitulo,
+        tamanho: tamanhoTituloEfetivo,
+        linhaUnica: geometria.orientacao === 'PAISAGEM',
         ajusteX,
         ajusteY,
         doc,
@@ -68,10 +75,10 @@ export function desenharBlocoTotais({
       campo({
         value: campoTotal.valor,
         x: x + 1.5,
-        y: yLinha + alturaLinha - 11,
+        y: yLinha + off.campo,
         largura: larguraColuna - 3,
         alinhamento: 'right',
-        tamanho: 8,
+        tamanho: tamanhoCampo,
         ajusteX,
         ajusteY,
         doc,

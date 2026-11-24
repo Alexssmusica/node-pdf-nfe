@@ -7,7 +7,7 @@ export function getTotalIcmsIpi(input: GeneratePdf.InputImposto): number {
     ...input,
     tituloSecao: 'TOTAL DO ICMS / IPI',
     tamanhoTitulo: 5,
-    alturaLinha: 24,
+    alturaLinha: input.geometria.alturaLinhaTotalIcmsIpi,
     linhas: [
       [
         { titulo: 'BASE DE CÁLCULO DO ICMS', valor: moeda(icms.vBC) },

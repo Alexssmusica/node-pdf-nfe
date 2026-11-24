@@ -14,16 +14,17 @@ export async function getDadosAdicionais({
   margemTopo,
   margemDireita,
   larguraDoFormulario,
+  geometria,
   infAdic,
   finalEspacoDet,
   earlyClose,
   fecharAposConteudo,
   qrCode
 }: GeneratePdf.InputDadosAdicionais): Promise<string> {
-  const maxBottom = DEFAULT_NFE.fundoDaPagina;
+  const maxBottom = geometria.fundoDaPagina;
   const temQr = Boolean(qrCode);
   const larguraQr = 82;
-  const xFisco = temQr ? 292 : 388.25;
+  const xFisco = temQr ? larguraDoFormulario * 0.498 : larguraDoFormulario * 0.662;
   const xQr = larguraDoFormulario - larguraQr;
   const text = infAdic?.infCpl ?? '';
   const textWidth = xFisco - 6;
