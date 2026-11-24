@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.3.1...v1.4.0) (2026-11-24)
+
+
+### Features
+
+* **danfe:** adiciona orientacao paisagem com geometria centralizada ([129f7da](https://github.com/Alexssmusica/node-pdf-nfe/commit/129f7da3733e2613a8151426b5900fd77afe4dc3))
+
 ## [1.3.1](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.3.0...v1.3.1) (2026-10-07)
 
 
