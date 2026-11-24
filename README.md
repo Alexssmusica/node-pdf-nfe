@@ -20,3 +20,16 @@ const pathLogo = '/path/to/logo';
 const doc = await gerarPDF(xml, { pathLogo, cancelada: false });
 doc.pipe(fs.createWriteStream('/path/to/file.pdf'));
 ```
+
+### Orientação da página
+Por padrão, a DANFE da NF-e é gerada em retrato. Para gerar em paisagem, use a opção `orientacao`:
+```javascript
+const doc = await gerarPDF(xml, { pathLogo, orientacao: 'PAISAGEM' });
+```
+
+| Valor | Resultado |
+|---|---|
+| `'RETRATO'` | A4 em pé (padrão) |
+| `'PAISAGEM'` | A4 deitado |
+
+A opção vale apenas para NF-e (modelo 55). Na NFC-e (modelo 65) ela é ignorada.

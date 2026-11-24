@@ -163,7 +163,6 @@ export async function gerarItens({
     doc.addPage(optionsDocFromGeometria(geometria));
     doc.y = 0;
     folha++;
-    itensNaFolha = 0;
     const restante = await criaLayout({
       ajusteX,
       ajusteY,
