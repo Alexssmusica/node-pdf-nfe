@@ -1,0 +1,314 @@
+/// <reference types="pdfkit" />
+import type {
+  TNFeInfNFeCobr,
+  TNFeInfNFeDest,
+  TNFeInfNFeEmit,
+  TNFeInfNFeIde,
+  TNFeInfNFeInfAdic,
+  TNFeInfNFeTotal,
+  TNFeInfNFeTransp
+} from '../../../contracts/schema';
+import type { GeometriaDanfe } from './geometria-nfe';
+import type { NFeProc, ProtNFe } from '../../../contracts/nfe-proc';
+
+export type Alinhamento = PDFKit.Mixins.TextOptions['align'];
+
+export type DefaultNfe = {
+  larguraDaPagina: number;
+  alturaDaPagina: number;
+  tamanhoDaFonteDoTitulo: number;
+  corDoTitulo: string;
+  alinhamentoDoTitulo: Alinhamento;
+  alinhamentoDoTituloDaTabela: Alinhamento;
+  tamanhoDaFonteDaSecao: number;
+  corDaSecao: string;
+  tamanhoDaFonteDoCampo: number;
+  alinhamentoDoCampo: Alinhamento;
+  corDoCampo: string;
+  tamanhoDaFonteDosItens: number;
+  separadorDeItens: boolean;
+  ajusteYDoLogotipo: number;
+  ajusteYDaIdentificacaoDoEmitente: number;
+  opacidadeDaHomologacao: number;
+  ajusteYDaHomologacao: number;
+  tamanhoDoCodigoDeBarras: number;
+  corDoLayout: string;
+  finalTamanhoDet1: number;
+  finalTamanhoDetDemais: number;
+  fundoDaPagina: number;
+  reservaDadosAdicionais: number;
+};
+
+export declare namespace GeneratePdf {
+  type InputLinhaHorizontal = {
+    x1: number;
+    x2: number;
+    y: number;
+    doc: PDFKit.PDFDocument;
+    ajusteY: number;
+    ajusteX: number;
+    margemTopo: number;
+    margemEsquerda: number;
+    margemDireita: number;
+    tracejada?: boolean;
+  };
+  type InputLinhaVertical = {
+    x: number;
+    y1: number;
+    y2: number;
+    doc: PDFKit.PDFDocument;
+    ajusteY: number;
+    ajusteX: number;
+    margemTopo: number;
+    margemEsquerda: number;
+    tracejada?: boolean;
+  };
+  type InputCriaMargem = {
+    doc: PDFKit.PDFDocument;
+    ajusteY: number;
+    ajusteX: number;
+    margemTopo: number;
+    margemEsquerda: number;
+    margemDireita: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    nf: NFeProc;
+    pathLogo?: string;
+    cancelada?: boolean;
+  };
+  type InputCriaLayout = {
+    doc: PDFKit.PDFDocument;
+    ajusteY: number;
+    ajusteX: number;
+    margemTopo: number;
+    margemEsquerda: number;
+    margemDireita: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    nf: NFeProc;
+    folha: number;
+    pathLogo?: string;
+    cancelada?: boolean;
+    overflowTextAdicionais?: string;
+  };
+  type InputTitulo = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    alinhamento?: Alinhamento;
+    tamanho?: number;
+    linhaUnica?: boolean;
+  };
+  type InputNormal = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    alinhamento?: Alinhamento;
+    tamanho?: number;
+  };
+  type InputCampo = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    alinhamento?: Alinhamento;
+    tamanho?: number;
+  };
+  type InputNegrito = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    alinhamento?: Alinhamento;
+    tamanho?: number;
+  };
+  type InputItalico = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    alinhamento?: Alinhamento;
+    tamanho?: number;
+  };
+  type InputSecao = {
+    x: number;
+    y: number;
+    value: string;
+    doc: PDFKit.PDFDocument;
+    largura: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    tamanho?: number;
+  };
+  type InputHomologacao = {
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    protNFe: ProtNFe;
+    cancelada?: boolean;
+    folha?: number;
+  };
+  type InputNotaCancelada = {
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    folha?: number;
+  };
+  type InputRecibo = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    dest: TNFeInfNFeDest;
+    emit: TNFeInfNFeEmit;
+    total: TNFeInfNFeTotal;
+    ide: TNFeInfNFeIde;
+  };
+  type InputDadosEmitente = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    emit: TNFeInfNFeEmit;
+    ide: TNFeInfNFeIde;
+    protNFe: ProtNFe;
+    pathLogo?: string;
+    folha?: number;
+  };
+  type InputRemetenteDestinatario = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    dest: TNFeInfNFeDest;
+    ide: TNFeInfNFeIde;
+  };
+  type InputImposto = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    total: TNFeInfNFeTotal;
+  };
+  type InputFaturaDuplicata = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    cobr?: TNFeInfNFeCobr;
+  };
+  type InputTransporte = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    transp: TNFeInfNFeTransp;
+  };
+  type InputISS = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    ajusteX: number;
+    ajusteY: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    emit: TNFeInfNFeEmit;
+    total: TNFeInfNFeTotal;
+  };
+  type InputMenuItens = {
+    y: number;
+    doc: PDFKit.PDFDocument;
+    ajusteX: number;
+    ajusteY: number;
+    margemEsquerda: number;
+    margemTopo: number;
+    margemDireita: number;
+    finalEspacoDet: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+  };
+  type InputDadosAdicionais = {
+    doc: PDFKit.PDFDocument;
+    ajusteX: number;
+    ajusteY: number;
+    margemEsquerda: number;
+    margemDireita: number;
+    margemTopo: number;
+    larguraDoFormulario: number;
+    geometria: GeometriaDanfe;
+    infAdic: TNFeInfNFeInfAdic;
+    finalEspacoDet: number;
+    earlyClose?: boolean;
+    fecharAposConteudo?: boolean;
+    qrCode?: string;
+  };
+}

@@ -1,7 +1,7 @@
 {
   "name": "@alexssmusica/node-pdf-nfe",
   "version": "1.4.0",
-  "description": "Modulo que auxilia na geração da Danfe NFe e NFCe.",
+  "description": "Modulo que auxilia na geração da DANFE da NF-e e NFC-e e da DANFSe da NFS-e.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -18,7 +18,9 @@
   "keywords": [
     "NFe",
     "NFCe",
-    "Danfe"
+    "NFSe",
+    "Danfe",
+    "DANFSe"
   ],
   "repository": {
     "type": "git",
@@ -28,20 +30,20 @@
   "scripts": {
     "build-release": "npm run format && npm run build && node release.js && npm run publish:npm",
     "clean-lib": "npx rimraf lib && npx rimraf tsconfig.tsbuildinfo",
-    "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-fonts",
+    "build": "npm run clean-lib && tsc -p tsconfig.json && npm run copy-assets",
     "format": "prettier src/**/*.{js,ts} --write",
     "publish:npm": "node publish.js",
     "type": "tsc --project tsconfig.json",
-    "copy-fonts": "copyfiles src/**/*.ttf lib/ -u 1",
+    "copy-assets": "copyfiles \"src/assets/**/*\" lib/ -u 1",
     "test-pdf": "nodemon --watch src ./tests/pdf.test.ts",
     "test": "ts-node ./tests/pdf.test.ts"
   },
   "dependencies": {
     "@bwip-js/node": "4.11.4",
     "date-fns": "4.4.0",
+    "fast-xml-parser": "5.12.1",
     "pdfkit": "0.21.0",
-    "qrcode": "1.5.4",
-    "xml2js": "0.6.2"
+    "qrcode": "1.5.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
@@ -55,7 +57,6 @@
     "@types/node": "^24.19.2",
     "@types/pdfkit": "^0.17.7",
     "@types/qrcode": "^1.5.6",
-    "@types/xml2js": "^0.4.14",
     "@typescript-eslint/eslint-plugin": "^8.74.0",
     "@typescript-eslint/parser": "^8.74.0",
     "dotenv": "^18.0.10",

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NFSe xmlns="http://www.sped.fazenda.gov.br/nfse" versao="1.01">
+  <infNFSe Id="NFS35503082211222333000181000000000000126110000000001">
+    <xLocEmi>Sao Paulo</xLocEmi>
+    <xLocPrestacao>Sao Paulo</xLocPrestacao>
+    <nNFSe>1261</nNFSe>
+    <cLocIncid>3550308</cLocIncid>
+    <xLocIncid>Sao Paulo</xLocIncid>
+    <xTribNac>Elaboracao de programas de computadores, inclusive de jogos eletronicos, independentemente da arquitetura construtiva da maquina em que o programa sera executado</xTribNac>
+    <xTribMun>Desenvolvimento de software sob encomenda</xTribMun>
+    <verAplic>SefinNac_1.0.0</verAplic>
+    <ambGer>2</ambGer>
+    <tpEmis>1</tpEmis>
+    <procEmi>1</procEmi>
+    <cStat>100</cStat>
+    <dhProc>2026-11-20T10:15:30-03:00</dhProc>
+    <nDFSe>000000001</nDFSe>
+    <emit>
+      <CNPJ>11222333000181</CNPJ>
+      <IM>12345678</IM>
+      <xNome>EMPRESA EXEMPLO DE SOFTWARE LTDA</xNome>
+      <enderNac>
+        <xLgr>Rua das Flores</xLgr>
+        <nro>100</nro>
+        <xBairro>Centro</xBairro>
+        <cMun>3550308</cMun>
+        <UF>SP</UF>
+        <CEP>01001000</CEP>
+      </enderNac>
+      <fone>11987654321</fone>
+      <email>contato@exemplo.com.br</email>
+    </emit>
+    <valores>
+      <vBC>10000.00</vBC>
+      <pAliqAplic>2.00</pAliqAplic>
+      <vISSQN>200.00</vISSQN>
+      <vTotalRet>215.00</vTotalRet>
+      <vLiq>9785.00</vLiq>
+    </valores>
+    <IBSCBS>
+      <cLocalidadeIncid>3550308</cLocalidadeIncid>
+      <xLocalidadeIncid>Sao Paulo</xLocalidadeIncid>
+      <valores>
+        <vBC>9800.00</vBC>
+        <uf>
+          <pIBSUF>0.10</pIBSUF>
+          <pAliqEfetUF>0.10</pAliqEfetUF>
+        </uf>
+        <mun>
+          <pIBSMun>0.00</pIBSMun>
+          <pAliqEfetMun>0.00</pAliqEfetMun>
+        </mun>
+        <fed>
+          <pCBS>0.90</pCBS>
+          <pAliqEfetCBS>0.90</pAliqEfetCBS>
+        </fed>
+      </valores>
+      <totCIBS>
+        <vTotNF>9785.00</vTotNF>
+        <gIBS>
+          <vIBSTot>9.80</vIBSTot>
+          <gIBSUFTot>
+            <vIBSUF>9.80</vIBSUF>
+          </gIBSUFTot>
+          <gIBSMunTot>
+            <vIBSMun>0.00</vIBSMun>
+          </gIBSMunTot>
+        </gIBS>
+        <gCBS>
+          <vCBS>88.20</vCBS>
+        </gCBS>
+      </totCIBS>
+    </IBSCBS>
+    <DPS versao="1.01">
+      <infDPS Id="DPS355030821122233300018100900000000000000001">
+        <tpAmb>2</tpAmb>
+        <dhEmi>2026-11-20T10:10:00-03:00</dhEmi>
+        <verAplic>ERP_1.0</verAplic>
+        <serie>900</serie>
+        <nDPS>1</nDPS>
+        <dCompet>2026-11-20</dCompet>
+        <tpEmit>1</tpEmit>
+        <cLocEmi>3550308</cLocEmi>
+        <prest>
+          <CNPJ>11222333000181</CNPJ>
+          <regTrib>
+            <opSimpNac>1</opSimpNac>
+            <regEspTrib>0</regEspTrib>
+          </regTrib>
+        </prest>
+        <toma>
+          <CNPJ>01234567000189</CNPJ>
+          <IM>87654321</IM>
+          <xNome>CLIENTE EXEMPLO COMERCIO LTDA</xNome>
+          <end>
+            <endNac>
+              <cMun>3304557</cMun>
+              <CEP>20040002</CEP>
+            </endNac>
+            <xLgr>Avenida Central</xLgr>
+            <nro>2000</nro>
+            <xCpl>Sala 501</xCpl>
+            <xBairro>Centro</xBairro>
+          </end>
+          <fone>2133334444</fone>
+          <email>financeiro@cliente.com.br</email>
+        </toma>
+        <serv>
+          <locPrest>
+            <cLocPrestacao>3550308</cLocPrestacao>
+          </locPrest>
+          <cServ>
+            <cTribNac>010101</cTribNac>
+            <cTribMun>001</cTribMun>
+            <xDescServ>Desenvolvimento de modulo de emissao de documentos fiscais conforme contrato 45/2026, referente a novembro de 2026.</xDescServ>
+            <cNBS>115013000</cNBS>
+          </cServ>
+          <infoCompl>
+            <xInfComp>Pagamento via boleto com vencimento em 20/12/2026.</xInfComp>
+            <xPed>PED-2026-0045</xPed>
+          </infoCompl>
+        </serv>
+        <valores>
+          <vServPrest>
+            <vServ>10000.00</vServ>
+          </vServPrest>
+          <trib>
+            <tribMun>
+              <tribISSQN>1</tribISSQN>
+              <tpRetISSQN>1</tpRetISSQN>
+            </tribMun>
+            <tribFed>
+              <piscofins>
+                <CST>01</CST>
+                <vBCPisCofins>10000.00</vBCPisCofins>
+                <pAliqPis>0.65</pAliqPis>
+                <pAliqCofins>3.00</pAliqCofins>
+                <vPis>65.00</vPis>
+                <vCofins>300.00</vCofins>
+                <tpRetPisCofins>0</tpRetPisCofins>
+              </piscofins>
+              <vRetIRRF>150.00</vRetIRRF>
+              <vRetCSLL>65.00</vRetCSLL>
+            </tribFed>
+            <totTrib>
+              <vTotTrib>
+                <vTotTribFed>580.00</vTotTribFed>
+                <vTotTribEst>0.00</vTotTribEst>
+                <vTotTribMun>200.00</vTotTribMun>
+              </vTotTrib>
+            </totTrib>
+          </trib>
+        </valores>
+        <IBSCBS>
+          <finNFSe>1</finNFSe>
+          <cIndOp>100301</cIndOp>
+          <dest>
+            <CNPJ>44555666000177</CNPJ>
+            <xNome>FILIAL DESTINATARIA EXEMPLO S.A.</xNome>
+            <end>
+              <endNac>
+                <cMun>3106200</cMun>
+                <CEP>30130010</CEP>
+              </endNac>
+              <xLgr>Rua da Bahia</xLgr>
+              <nro>500</nro>
+              <xBairro>Funcionarios</xBairro>
+            </end>
+            <email>fiscal@destinataria.com.br</email>
+          </dest>
+          <valores>
+            <trib>
+              <gIBSCBS>
+                <CST>000</CST>
+                <cClassTrib>000001</cClassTrib>
+              </gIBSCBS>
+            </trib>
+          </valores>
+        </IBSCBS>
+      </infDPS>
+    </DPS>
+  </infNFSe>
+</NFSe>
