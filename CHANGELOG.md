@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.4.0...v1.5.0) (2026-11-27)
+
+
+### Features
+
+* **nfse:** adiciona DANFSe e reorganiza projeto em dominios ([5d5eb8a](https://github.com/Alexssmusica/node-pdf-nfe/commit/5d5eb8a6f29c699423e4ff84ec68c23a382f1e38))
+
 # [1.4.0](https://github.com/Alexssmusica/node-pdf-nfe/compare/v1.3.1...v1.4.0) (2026-11-24)
 
 
